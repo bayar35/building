@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Обой & SPC Шал Угсралтын Үйлчилгээ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 
 <body>
 
+    <!-- НАВИГАЦИ БА ТОЛГОЙ -->
     <header class="sub-header">    
         <nav>
-            <a href="logo"> <img src="images/logo.png" alt=""></a>
+            <a href="index.html"> <img src="images/logo.png" alt="Logo"></a>
             <div class="nav-links" id="navLinks">
                 <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                 <ul>
@@ -32,180 +32,101 @@
             </div>
             <i class="fa-solid fa-bars" onclick="showMenu()"></i>
         </nav>                    
-       <h1>Обой наалт болон SPC шал угсралт</h1>
+        <h1>Обой наалт болон SPC шал угсралт</h1>
     </header>
 
-    <header class="head">
-        <div class="container">
-            
-            <p>Найдвартай үйлчилгээг нэг дороос</p>
-            <a href="#calculator" class="btn-primary">Үнэ тооцоолох & Захиалах</a>
-        </div>
-    </header>
-
-    <section class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-paint-roller" style="color: #2563eb;"></i></div>
-            <h3>Чанар сайтай обой</h3>
-            <p>Флизелин болон винил суурьтай угаадаг обойг төгс наана.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-border-all" style="color: #2563eb;"></i></div>
-            <h3>SPC шал угсралт</h3>
-            <p>Цэвэрхэн, хурдан бөгөөд усны хамгаалалттай орчин үеийн шал.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fa-solid fa-building-user" style="color: #2563eb;"></i></div>
-            <h3>Баталгаат мастерууд</h3>
-            <p>Туршлагатай бригад цаг тухайд нь чанартай хүлээлгэж өгнө.</p>
+    <!-- ҮЙЛЧИЛГЭЭНИЙ КАРТУУД -->
+    <section class="course">
+        <div class="row">
+            <div class="product-card">
+                <div class="feature-icon" style="text-align: center;"><i class="fa-solid fa-paint-roller" style="color: #ff523b; font-size: 2.5rem;"></i></div>
+                <h3>Чанар сайтай обой</h3>
+                <p>Флизелин болон vinyl суурьтай угаадаг обойг төгс наана.</p>
+            </div>
+            <div class="product-card">
+                <div class="feature-icon" style="text-align: center;"><i class="fa-solid fa-border-all" style="color: #ff523b; font-size: 2.5rem;"></i></div>
+                <h3>SPC шал угсралт</h3>
+                <p>Цэвэрхэн, хурдан бөгөөд усны хамгаалалттай орчин үеийн шал.</p>
+            </div>
+            <div class="product-card">
+                <div class="feature-icon" style="text-align: center;"><i class="fa-solid fa-building-user" style="color: #ff523b; font-size: 2.5rem;"></i></div>
+                <h3>Баталгаат мастерууд</h3>
+                <p>Туршлагатай бригад цаг тухайд нь чанартай хүлээлгэж өгнө.</p>
+            </div>
         </div>
     </section>
 
-    <!-- CALCULATOR & BOOKING SECTION -->
-    <section id="calculator" class="calculator-section">
+    <!-- ТООЦООЛУУР БА ФОРМ СЕКЦ -->
+    <section class="calculator-section">
         <h2>Урьдчилсан Үнийн Тооцоолуур</h2>        
-        <div>
-            <!-- Wallpaper inputs -->
-            <div class="form-group">
-                <label>Обой орох рулон тоо:</label>
-                <input type="number" id="rolls" placeholder="Жишээ нь: 10">
-            </div>
-
-            <!-- SPC Floor inputs -->
-            <div class="form-group">
-                <label>SPC шал угсрах талбай (м.кв):</label>
-                <input type="number" id="floorM2" placeholder="Жишээ нь: 40">
-            </div>
-
-            <!-- Calculate Button -->
-            <button onclick="calculatePrice()" class="btn-dark">Үнийг тооцох</button>
-
-            <!-- Result Box -->
-            <div id="resultBox" class="result-box hidden">
-                <p class="result-title">Тооцоолсон урьдчилсан дүнгээр:</p>
-                <p id="totalPrice" class="result-price">0 ₮</p>
-                <p class="result-note">* Материал болон ажлын хөлс нийлсэн ойролцоо дүнгээр тооцов.</p>
-            </div>
+        <div class="form-group">
+            <label>Обой орох рулон тоо:</label>
+            <input type="number" placeholder="Жишээ нь: 5">
         </div>
+        <div class="form-group">
+            <label>SPC шал угсрах талбай (м.кв):</label>
+            <input type="number" placeholder="Жишээ нь: 30">
+        </div>
+        <button class="btn-dark" style="margin-bottom: 20px;">Үнийг тооцох</button>
 
-        <!-- ORDER FORM -->
-        <div class="order-container">
-            <h3>Захиалга өгөх</h3>
-            <form id="orderForm" onsubmit="sendOrder(event)">
-                <div class="form-group">
-                    <label style="font-size: 0.875rem;">Таны нэр:</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label style="font-size: 0.875rem;">Утасны дугаар:</label>
-                    <input type="tel" id="phone" required>
-                </div>
-                <div class="form-group">
-                    <label style="font-size: 0.875rem;">Хаяг (Байр / Хороолол):</label>
-                    <input type="text" id="address" required>
-                </div>
-                <button type="submit" class="btn-submit">Захиалга илгээх</button>
-            </form>
-            <div id="successMsg" class="success-msg hidden">
-                Амжилттай захиалга илгээгдлээ! Бид тун удахгүй тантай холбогдох болно.
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+        <h2>Захиалга өгөх</h2>
+        <div class="form-group">
+            <label>Таны нэр:</label>
+            <input type="text" placeholder="Нэрээ оруулна уу">
+        </div>
+        <div class="form-group">
+            <label>Утасны дугаар:</label>
+            <input type="tel" placeholder="Утасны дугаар">
+        </div>
+        <div class="form-group">
+            <label>Хаяг (Байр / Хороолол):</label>
+            <input type="text" placeholder="Хаяг оруулна уу">
+        </div>
+        <button class="btn-submit">Захиалга илгээх</button>
+    </section>
+
+    <!-- FACEBOOK ПЕЙЖ СЕКЦ -->
+    <section class="facebook-section" style="width: 100%; max-width: 1200px; margin: 50px auto; text-align: center; padding: 0 20px;">
+        <h2 style="font-size: 1.6rem; color: #1e3a8a; margin-bottom: 10px; font-weight:600;">Манай Facebook Хуудас</h2>
+        <p style="color: #777; margin-bottom: 20px;">Шинэ бүтээгдэхүүн, зураг, видео мэдээллийг цаг тухайд нь аваарай</p>
+        <div style="display: flex; justify-content: center; background: #fff; padding: 15px; border-radius: 12px; max-width: 420px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee;">
+            <div class="fb-page" 
+              data-href="https://facebook.com" 
+              data-tabs="timeline" 
+              data-width="380" 
+              data-height="500" 
+              data-small-header="false" 
+              data-adapt-container-width="true" 
+              data-hide-cover="false" 
+              data-show-facepile="true">
             </div>
         </div>
     </section>
 
- <!-- FACEBOOK PAGE SECTION (Footer-ийн өмнө) -->
-<section class="facebook-section">
-    <div class="facebook-title-wrapper">
-        <h2 class="section-title">Манай Facebook Хуудас</h2>
-        <p class="section-subtitle">Шинэ бүтээгдэхүүн, зураг, видео мэдээллийг цаг тухайд нь аваарай</p>
-    </div>
-    
-    <div class="facebook-container">
-        <!-- Таны пэйж залгаас код -->
-        <div class="fb-page" 
-          data-href="https://www.facebook.com/profile.php?id=61560788698223" 
-          data-tabs="timeline" 
-          data-width="450" 
-          data-height="500" 
-          data-small-header="false" 
-          data-adapt-container-width="true" 
-          data-hide-cover="false" 
-          data-show-facepile="true">
-        </div>
-    </div>
-</section>
-
-
+    <!-- ХӨЛ ХЕСЕГ -->
     <section class="footer">
         <h4>Бидний тухай</h4>
         <p>Паркетан шал • Тавилгын хавтан • Интерьерийн бүрэн шийдэл • Захиалга, Зөвлөгөө</p>
-
         <div class="icons">
-            <a href="https://www.facebook.com/voehringer.gmbh/" target="_blank">
-                <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://www.instagram.com/voehringer_gmbh_und_co._kg/" target="_blank" rel="noopener noreferrer" style="color: #e4405f;">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/company/vöhringer-gmbh-&-co.-kg/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2;">
-                <i class="fa-brands fa-linkedin"></i>
-            </a>
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/watch?v=nw7YdZEaxRw" target="_blank" rel="noopener noreferrer" style="color: #ff0000;">
-                <i class="fa-brands fa-youtube"></i>
-            </a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
         </div>
-        <p>Made with <i class="fa-regular fa-heart"></i> by Superior Contruction XXK, Ulaanbaatar, Mongolia, 2026</p>
-
+        <p>Made with <i class="fa-solid fa-heart" style="color: #ff523b;"></i> by Superior Construction XXK, Ulaanbaatar, Mongolia, 2026</p>
     </section>
 
-        <script>
-
-            var navLinks = document.getElementById("navLinks");
-
-            function showMenu() {
-                navLinks.style.right = "0";
-            }
-
-            function hideMenu() {
-                navLinks.style.right = "-200px";
-            }
-        </script>
-
-    <script>
-        // Тооцоолуур ажиллах функц
-        function calculatePrice() {
-            let rolls = document.getElementById("rolls").value;
-            let floorM2 = document.getElementById("floorM2").value;
-            
-            let rollPrice = 15000; // Жишээ үнэ (Рулон тутмын наах болон материал үнэ)
-            let floorPrice = 25000; // м.кв тутмын үнэ
-
-            let total = (rolls * rollPrice) + (floorM2 * floorPrice);
-
-            let resultBox = document.getElementById("resultBox");
-            let totalPriceElem = document.getElementById("totalPrice");
-
-            if(total > 0) {
-                totalPriceElem.innerText = total.toLocaleString() + " ₮";
-                resultBox.classList.remove("hidden");
-            } else {
-                alert("Та тоо хэмжээг оруулна уу.");
-            }
-        }
-
-        // Захиалга илгээх функц
-        function sendOrder(event) {
-            event.preventDefault();
-            document.getElementById("successMsg").classList.remove("hidden");
-            document.getElementById("orderForm").reset();
-        }
-    </script>
-
     <!-- Facebook JavaScript SDK -->
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://facebook.net"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://facebook.net"></script>
 
-
+    <!-- Цэс удирдах Script -->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu(){ navLinks.style.right = "0"; }
+        function hideMenu(){ navLinks.style.right = "-200px"; }
+    </script>
 </body>
 </html>
