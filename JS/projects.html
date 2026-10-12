@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хэрэгжүүлсэн төслүүд | Засвар үйлчилгээ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Зургийн харьцуулалт утас болон компьютер дээр */
+        .comparison-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* 4 үйлчилгээний хэсгийн сетка (Компьютер дээр зэрэгцэнэ, утсан дээр доошоо цуврна) */
+        .services-grid-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Компьютер дээр 2 баганаар зэрэгцэнэ */
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Захиалгын формын хэсгийг хэт өргөн болгохгүй голд нь барих */
+        .comment-box {
+            max-width: 700px;
+            margin: 50px auto 0 auto !important;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .comment-form input, 
+        .comment-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Гар утас болон жижиг дэлгэц дээрх тохиргоо */
+        @media (max-width: 768px) {
+            .comparison-images {
+                grid-template-columns: 1fr;
+            }
+            .services-grid-box {
+                grid-template-columns: 1fr; /* Утсан дээр дээрээс доошоо цуврна */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header хэсэг -->
+    <header class="sub-header">    
+        <nav>
+            <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vöhringer.html">Vöhringer</a></li>
+                    <li><a href="gonick.html">Гоник</a></li>
+                    <li><a href="blog.html">Захиалагчийн булан</a></li>
+                    <li><a href="calculator.html">Тооцоолол</a></li>
+                    <li><a href="zasvar.html">Засвар</a></li>
+                    <li><a href="projects.html" class="active">Төслүүд</a></li>
+                    <li><a href="contact.html">Холбоо</a></li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+        </nav>                
+        <h1>Хэрэгжүүлсэн засвар, төслүүд</h1>
+    </header>
+
+    <!-- Үндсэн контент хэсэг -->
+    <section class="blog-content">
+        
+        <!-- Бидний хийдэг ажлын чиглэлүүд -->
+        <div class="project-intro" style="margin-bottom: 50px;">
+            <h2>Бид дараах засвар, угсралтын ажлыг хийж байна</h2>
+            <p>Бид орон сууц, албан тасалгаа болон үйлчилгээний талбайд интерьерийн цогц засвар үйлчилгээг чанарын өндөр түвшинд, албан ёсны баталгаатайгаар гүйцэтгэж байна.</p>
+            
+            <div class="services-grid-box">
+                <div class="service-card-item" style="background: #fff; padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; border-left: 5px solid #ff523b;">
+                    <h4 style="font-size: 18px; color: #222; margin-bottom: 8px;"><i class="fa-solid fa-hammer" style="color: #ff523b; margin-right: 10px;"></i> Дотор засал</h4>
+                    <p style="font-size: 14px; color: #666; margin: 0;">Обой хуулах, наах, хана тааз тэгшлэх, будах, эмульсдэх</p>
+                </div>
+                
+                <div class="service-card-item" style="background: #fff; padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; border-left: 5px solid #ff523b;">
+                    <h4 style="font-size: 18px; color: #222; margin-bottom: 8px;"><i class="fa-solid fa-layer-group" style="color: #ff523b; margin-right: 10px;"></i> Шал болон хавтан</h4>
+                    <p style="font-size: 14px; color: #666; margin: 0;">Паркет, ламинат, SPC шал угсрах, плита наах</p>
+                </div>
+                
+                <div class="service-card-item" style="background: #fff; padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; border-left: 5px solid #ff523b;">
+                    <h4 style="font-size: 18px; color: #222; margin-bottom: 8px;"><i class="fa-solid fa-couch" style="color: #ff523b; margin-right: 10px;"></i> Тавилга угсралт</h4>
+                    <p style="font-size: 14px; color: #666; margin: 0;">Гал тогооны тавилга, шкаф, тавиур, ширээ, шүүгээ шинэчлэх, угсрах</p>
+                </div>
+                
+                <div class="service-card-item" style="background: #fff; padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; border-left: 5px solid #ff523b;">
+                    <h4 style="font-size: 18px; color: #222; margin-bottom: 8px;"><i class="fa-solid fa-sliders" style="color: #ff523b; margin-right: 10px;"></i> Инженерийн шугам сүлжээ</h4>
+                    <p style="font-size: 14px; color: #666; margin: 0;">Цахилгаан, сантехник, агааржуулалтын систем угсрах, шинэчлэх</p>
+                </div>
+            </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+        <!-- Төслийн харьцуулалт (Өмнө, Явц, Дараа) -->
+        <div class="project-showcase">
+            <h2>Хэрэгжүүлсэн бодит төслүүд (Ажлын явц)</h2>
+            <p>Бидний хийсэн ажлыг эхлэхээс өмнө, явц дунд болон дууссан байдлаар нь харьцуулан харуулж байна.</p>
+
+            <!-- Төслийн жишээ 1 -->
+            <div class="project-card-item" style="background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 25px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+                <h3 style="margin-bottom: 15px; color: #222;">Төсөл #1: Орон сууцны иж бүрэн засвар, гал тогоо болон тавилга угсралт</h3>
+                
+                <div class="comparison-images">
+                    <div style="text-align: center;">
+                        <img src="images/before.jpg" alt="Эхлэхээс өмнө" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
+                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #e74c3c;">1. Эхлэхээс өмнө</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="images/during.jpg" alt="Гүйцэтгэх явц" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
+                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #f39c12;">2. Хийж буй явц</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="images/3d_house.png" alt="Дууссаны дараа" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
+                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #27ae60;">3. Хийсний дараа</span>
+                    </div>
+                </div>
+                <p style="color: #666; font-size: 14px; margin-top: 15px;"><strong>Хийсэн ажлууд:</strong> Хуучин обойг хуулж хана тэгшилсэн, SPC шал болон плита наасан, захиалгат гал тогооны тавилга болон коридорын шкаф угсарч, цахилгаан, сантехникийн шугам шинэчилсэн.</p>
+            </div>
+
+            <!-- Төслийн жишээ 2 -->
+            <div class="project-card-item" style="background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 25px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+                <h3 style="margin-bottom: 15px; color: #222;">Төсөл #2: Ариун цэврийн өрөөний ус чийг тусгаарлалт ба плита наах</h3>
+                
+                <div class="comparison-images">
+                    <div style="text-align: center;">
+                        <img src="images/bath1.jpg" alt="Эхлэхээс өмнө" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
+                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #e74c3c;">1. Эхлэхээс өмнө</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="images/bath2.jpg" alt="Гүйцэтгэх явц" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
+                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #f39c12;">2. Хийж буй явц</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="images/bath3.jpg" alt="Дууссаны дараа" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
+                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #27ae60;">3. Хийсний дараа</span>
+                    </div>
+                </div>
+                <p style="color: #666; font-size: 14px; margin-top: 15px;"><strong>Хийсэн ажлууд:</strong> XPS хавтан болон гидроизоляци ашиглан чийг тусгаарлалт хийж, кварцан болон керамик плита наан, сантехникийн холболтуудыг бүрэн шинэчилсэн.</p>
+            </div>
+
+        </div>
+
+        <!-- Санал хүсэлт илгээх хэсэг (Зөв хэмжээтэй, голдоо байрлах) -->
+        <div class="comment-box">
+            <h3 style="margin-bottom: 20px; color: #222; font-size: 20px;">Танд хийлгэх гэж буй засварынхаа талаар асууж тодоруулах зүйл байвал бидэнтэй холбогдоорой.</h3>
+            <form class="comment-form">
+                <input type="text" placeholder="Таны нэр" required>
+                <input type="email" placeholder="Цахим шуудан" required>
+                <textarea rows="5" placeholder="Хийлгэх гэж буй засварынхаа тухай бичнэ үү..." required></textarea>
+                <button type="submit" class="hero red-btn" style="padding: 12px 30px; cursor: pointer; border: none; background: #ff523b; color: #fff; border-radius: 5px; font-weight: 600;">ХҮСЭЛТ ИЛГЭЭХ</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer хэсэг -->
+    <section class="footer">
+        <h4>Бидний тухай</h4>
+        <p>Паркетан шал • Тавилгын хавтан • Интерьерийн бүрэн шийдэл • Захиалга, Зөвлөгөө</p>
+
+        <div class="icons">
+            <a href="https://www.facebook.com/voehringer.gmbh/" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/voehringer_gmbh_und_co._kg/" target="_blank" rel="noopener noreferrer" style="color: #e4405f;">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/company/vöhringer-gmbh-&-co.-kg/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2;">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/watch?v=nw7YdZEaxRw" target="_blank" rel="noopener noreferrer" style="color: #ff0000;">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+        <p>Made with <i class="fa-regular fa-heart"></i> by Superior Construction XXK, Ulaanbaatar, Mongolia, 2026</p>
+    </section>
+
+    <!-- Responsive цэсийн скрипт -->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+
+        function showMenu() {
+            navLinks.style.right = "0";
+        }
+
+        function hideMenu() {
+            navLinks.style.right = "-200px";
+        }
+    </script>
+
+</body>
+</html>

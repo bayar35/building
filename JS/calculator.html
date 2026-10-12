@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тооцоолол</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/fontawesome.min.css" integrity="sha384-mj4mLShEAyWi4Bui9LmFkAjPYWof6WrG8DfS8ebHhjm4/MClMqMMHpQzehNk5HeM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 30px;
+        }
+        .form-section, .result-section {
+            flex: 1;
+        }
+        .result-section {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        h1 {
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+        .result-section h2 {
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        input:focus, select:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+        .info-box {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #1e40af;
+            line-height: 1.5;
+        }
+        .info-box ul {
+            margin-left: 18px;
+            margin-top: 5px;
+            color: #334155;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #cbd5e1;
+        }
+        .total-row {
+            border-top: 1px solid #334155;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            color: #f8fafc;
+        }
+        #grandTotal {
+            color: #34d399;
+            font-size: 22px;
+        }
+        button {
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .note {
+            text-align: center;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+        }
+        .calc-container {
+            max-width: 450px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            box-sizing: border-box;
+        }
+        .calc-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .form-select, .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-select:focus, .form-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .calc-button {
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            font-weight: 600;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        .calc-button:hover {
+            background-color: #1d4ed8;
+        }
+        .result-box {
+            margin-top: 24px;
+            padding: 16px;
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            text-align: center;
+            display: none; /* Анхандаа нууц байна */
+        }
+        .result-title {
+            font-size: 14px;
+            color: #4b5563;
+            margin: 0;
+        }
+        .result-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 8px 0 0 0;
+        }
+        .result-note {
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header class="sub-header">    
+        <nav>
+            <a href="logo"> <img src="images/logo.png" alt=""></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vöhringer.html">Vöhringer</a></li>
+                    <li><a href="gonick.html">Гоник</a></li>
+                    <li><a href="blog.html">Захиалагчийн булан</a></li>
+                    <li><a href="calculator.html">Тооцоолол</a></li>
+                    <li><a href="zasvar.html">Засвар</a></li>
+                    <li><a href="projects.html">Төслүүд</a></li>
+                    <li><a href="contact.html">Холбоо</a></li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+        </nav>                    
+        <h1>Материалын Үнэ Тооцоолол</h1>
+    </header>
+
+   <main>
+        <div class="calc-container">
+            <h2 class="calc-title">Материалын Үнэ Тооцоолуур</h2>
+            
+            <form id="calculatorForm">
+                <!-- Материал сонгох -->
+                <div class="form-group">
+                    <label class="form-label" for="materialType">Материалын төрөл сонгох:</label>
+                    <select id="materialType" class="form-select">
+                        <option value="45000">SPC Шал (Суурилуулалттай) - 45,000₮ / м²</option>
+                        <option value="35000">Ламинатан Шал - 35,000₮ / м²</option>
+                        <option value="85000">Паркет Шал - 85,000₮ / м²</option>
+                        <option value="15000">Обои наалт - 15,000₮ / м²</option>
+                        <option value="60000">Тавилгын хуулга сэргээлт - 60,000₮ / м²</option>
+                    </select>
+                </div>
+
+                <!-- Талбайн хэмжээ оруулах (м²) -->
+                <div class="form-group">
+                    <label class="form-label" for="areaSize">Талбайн хэмжээ (м²):</label>
+                    <input 
+                        type="number" 
+                        id="areaSize" 
+                        placeholder="Жишээ нь: 45" 
+                        min="1"
+                        class="form-input"
+                    >
+                </div>
+
+                <!-- Тооцоолох товч -->
+                <button type="submit" class="calc-button">
+                    Үнэ тооцож гаргах
+                </button>
+            </form>
+
+            <!-- Үр дүн харуулах хэсэг -->
+            <div id="resultBox" class="result-box">
+                <p class="result-title">Урьдчилсан нийт өртөг:</p>
+                <p id="calculatedPrice" class="result-price">0 ₮</p>
+                <p class="result-note">* Бодит хэмжилт болон нэмэлт нөхцөлөөс шалтгаалан үнэ өөрчлөгдөх боломжтой.</p>
+            </div>
+        </div>
+    </main>
+
+    <h1>Обой засварын ухаалаг тооцоолуур</h1>
+
+    <div class="container">
+        <!-- Input Form Section -->
+        <div class="form-section">
+            <h2>1. Захиалгын мэдээлэл</h2>
+            
+            <div class="input-group">
+                <label for="areaInput">Өрөөний нийт талбай (м²):</label>
+                <input type="number" id="areaInput" value="50" min="10" max="500" oninput="calculateTotal()">
+            </div>
+
+            <div class="input-group">
+                <label for="materialSelect">Обой болон материалын сонголт:</label>
+                <select id="materialSelect" onchange="calculateTotal()">
+                    <option value="0">Материалгүй (Зөвхөн мастерын ажил)</option>
+                    <option value="6000">Код A: Эконом (Энгийн обой - ~6,000₮/м²)</option>
+                    <option value="13000" selected>Код B: Стандарт (Солонгос обой - ~13,000₮/м²)</option>
+                    <option value="30000">Код C: Премиум (Герман/Итали обой - ~30,000₮/м²)</option>
+                </select>
+            </div>
+
+            <div class="info-box">
+                <strong>🛠 Мастерын 15,000₮/м² хөлсөнд багтах ажлууд:</strong>
+                <ul>
+                    <li>Хуучин обой хуулах</li>
+                    <li>Ханын зөрүү засах & Грунтлэх</li>
+                    <li>Шинэ обой наах</li>
+                    <li>Ажил дууссаны цэвэрлэгээ</li>
+                    <li>Чанарын хяналт & Хүлээлцэх</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Result & Summary Section -->
+        <div class="result-section">
+            <div>
+                <h2>2. Төсвийн нэгдсэн тооцоо</h2>
+                
+                <div class="summary-row" style="margin-top: 20px;">
+                    <span>Мастерын ажлын хөлс:</span>
+                    <span id="laborCost" style="font-weight: bold; color: white;">750,000 ₮</span>
+                </div>
+                <div class="summary-row">
+                    <span>Материалын урьдчилсан төсөв:</span>
+                    <span id="materialCost" style="font-weight: bold; color: white;">650,000 ₮</span>
+                </div>
+                <div class="total-row">
+                    <span>Нийт тооцоолсон өртөг:</span>
+                    <span id="grandTotal">1,400,000 ₮</span>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="alert('Захиалга амжилттай бүртгэгдлээ!')">Энэ үнээр мастер захиалах</button>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Calculation Logic -->
+    <script>
+        function calculateTotal() {
+            const area = parseFloat(document.getElementById('areaInput').value) || 0;
+            const materialRate = parseFloat(document.getElementById('materialSelect').value) || 0;
+            
+            // Мастерын ажлын хөлс тогтмол 15,000₮ / м2
+            const laborRate = 15000;
+            
+            const totalLabor = area * laborRate;
+            const totalMaterial = area * materialRate;
+            const grandTotal = totalLabor + totalMaterial;
+
+            // Үр дүнг дэлгэцэнд харуулах
+            document.getElementById('laborCost').innerText = totalLabor.toLocaleString() + ' ₮';
+            document.getElementById('materialCost').innerText = totalMaterial.toLocaleString() + ' ₮';
+            document.getElementById('grandTotal').innerText = grandTotal.toLocaleString() + ' ₮';
+        }
+
+        // Хуудас ачаалахад анхны утгаар тооцох
+        calculateTotal();
+    </script>
+
+    <!-- JavaScript логик -->
+    <script>
+        const form = document.getElementById('calculatorForm');
+        const materialTypeSelect = document.getElementById('materialType');
+        const areaSizeInput = document.getElementById('areaSize');
+        const resultBox = document.getElementById('resultBox');
+        const calculatedPriceElement = document.getElementById('calculatedPrice');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const rate = parseFloat(materialTypeSelect.value);
+            const area = parseFloat(areaSizeInput.value);
+
+            if (isNaN(area) || area <= 0) {
+                alert("Зөв талбай/хэмжээ оруулна уу.");
+                return;
+            }
+
+            const totalPrice = rate * area;
+
+            calculatedPriceElement.textContent = totalPrice.toLocaleString('en-US') + " ₮";
+            resultBox.style.display = 'block'; // Цэвэр CSS-ээр харуулах
+        });
+    </script>
+
+    
+    <section class="footer">
+        <h4>Бидний тухай</h4>
+        <p>Паркетан шал • Тавилгын хавтан • Интерьерийн бүрэн шийдэл • Захиалга, Зөвлөгөө</p>
+
+        <div class="icons">
+            <a href="https://www.facebook.com/voehringer.gmbh/" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/voehringer_gmbh_und_co._kg/" target="_blank" rel="noopener noreferrer" style="color: #e4405f;">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/company/vöhringer-gmbh-&-co.-kg/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2;">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/watch?v=nw7YdZEaxRw" target="_blank" rel="noopener noreferrer" style="color: #ff0000;">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+        <p>Made with <i class="fa-regular fa-heart"></i> by Superior Contruction XXK, Ulaanbaatar, Mongolia, 2026</p>
+
+    </section>
+
+        <script>
+
+            var navLinks = document.getElementById("navLinks");
+
+            function showMenu() {
+                navLinks.style.right = "0";
+            }
+
+            function hideMenu() {
+                navLinks.style.right = "-200px";
+            }
+        </script>
+
+</body>
+</html>

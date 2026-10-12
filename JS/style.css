@@ -1,0 +1,1117 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+.header {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(9, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url(images/voehringer.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+nav img {
+    width: 150px;
+}
+.nav-links {
+    flex: 1;
+    text-align: right;
+}
+.nav-links ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+.nav-links ul li a {
+    color: #eee;
+    text-decoration: none;
+    font-size: 13px;
+}
+.nav-links ul li::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.nav-links ul li:hover::after {
+    width: 100%;
+}
+.text {
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.text h1 {
+    font-size: 62px;
+    color: #ddd;
+}
+.text p {
+    margin: 10px 0 40px;
+    font-size: 14px;
+    color: #bbb;
+}
+.hero {
+    display: inline-block;
+    text-decoration: none;
+    color: #ddd;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+.hero:hover {
+    border: 1px solid #f44336;
+    background: #f44336;
+    transition: 1s;
+}
+nav .fa-solid {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .text h1 {
+        font-size: 20px;
+    }
+    .nav-links ul li {
+        display: block;
+    }
+    .nav-links {
+        position: fixed;
+        background: #f44336;
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        right: -200px;
+        text-align: left;
+        z-index: 2;
+        transition: 1s;
+    }
+    nav .fa-solid {
+        display: block;
+        color: #fff;
+        margin: 10px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .nav-links ul {
+        padding: 30px;
+    }
+}
+
+.course {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+h1 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #333;
+}
+p {
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+
+.row {
+    margin-top: 10%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px; /* Картуудын хоорондох зай */
+}
+.course-col {
+    background: #fff5f5; /* Картын цайвар дэвсгэр өнгө */
+    border-radius: 10px;
+    padding: 30px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    text-decoration: none; /* Доогуур зураас арилгах */
+    display: block;
+    color: #333; /* Текстийн үндсэн өнгө */
+}
+
+.course-col h3 {
+    color: #222;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.course-col p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Hover эффектийг энд зөвхөн ганц удаа л бичнэ */
+.course-col:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
+}
+h3 {
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+@media (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+.campus {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
+.campus-col {
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.campus-col img {
+    width: 100%;
+    display: block;
+    height: 230px;          /* ШИНЭ */
+    object-fit: cover;      /* ШИНЭ */
+}
+.layer {
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+}
+.layer:hover {
+    background: rgba(226, 0, 0, 0.7);
+}
+.layer h3 {
+    width: 100%;
+    font-weight: 500;
+    color: #fff;
+    font-size: 26px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s;
+}
+.layer:hover h3 {
+    bottom: 49%;
+    opacity: 1;
+}
+
+.facilities {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.facilities-col {
+    flex-basis: 31%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    text-align: left;
+    display: flex;          /* ШИНЭ */
+    flex-direction: column; /* ШИНЭ */
+}
+.facilities-col img {
+    width: 100%;
+    border-radius: 10px;
+    height: 230px;          /* ШИНЭ */
+    object-fit: cover;      /* ШИНЭ */
+}
+.facilities-col p {
+    padding: 0;
+}
+.facilities-col h3 {
+    margin-top: 16px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.testimonials {
+    width: 80%;
+    margin: auto;
+    padding-top: 40px;
+    text-align: center;
+}
+.testimonial-col {
+    flex-basis: 44%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    text-align: left;
+    background: #fff3f3;
+    padding: 25px;
+    cursor: pointer;
+    display: flex;
+}
+.testimonial-col img {
+    height: 40px;
+    margin-left: 5px;
+    margin-right: 30px;
+    border-radius: 50%;
+}
+.testimonial-col p {
+    padding: 0;
+    font-size: 13px;       /* Үсгийн хэмжээг жаахан багасгах */
+    color: #666;           /* Өнгийг илүү зөөлөн саарал болгох */
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-weight: normal;   /* Хэт тод байвал энэ мөрийг нэмээрэй */
+}
+.testimonial-col h3 {
+    margin-top: 15px;
+    text-align: left;
+    font-weight: 100;
+}
+.testimonial-col .fa-solid {
+    color: #f44336;
+}
+
+@media (max-width: 700px) {
+    .testimonial-col img {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+}
+
+.cta {
+    margin: 100px auto;
+    width: 80%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(images/banner2.png);
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    text-align: center;
+    padding: 100px 0;
+}
+.cta h1 {
+    color: #ddd;
+    margin-bottom: 40px;
+    padding: 0;
+}
+@media (max-width: 700px) {
+    .cta h1 {
+        font-size: 24px;
+    }
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 30px 0;
+}
+.footer h4 {
+    margin-bottom: 25px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.icons .fa-brands {
+    color: #f44336;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+    font-size: 20px;
+}
+.icons a {
+    text-decoration: none !important; /* Зураасыг албадан арилгана */
+    border: none !important;          /* Хэрвээ border байвал арилгана */
+    outline: none !important;
+}
+.fa-heart {
+    color: #f44336;
+}
+
+.sub-header {
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(9, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url(images/background.jpg);
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+}
+.sub-header h1 {
+    margin-top: 100px;
+    color: #eee;
+}
+.about-us {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 50px;
+} 
+.about-col {
+    flex-basis: 48%;
+    padding: 30px 2px;
+}
+.about-col img {
+    width: 100%;
+}
+.about img {
+    width: 150px;
+    display: block; margin: 0 auto;
+}
+.about-col h1 {
+    padding-top: 0;
+    text-align: center;
+}
+.about-col p {
+    padding: 15px 0 25px;
+}
+.red-btn {
+    border: 1px solid #f44336;
+    background: transparent;
+    color: #f44336;
+}
+.red-btn:hover {
+    color: #fff;
+}
+.products {
+    font-size: 16px;       /* Үсгийн хэмжээг жаахан багасгах */
+    color: #666;           /* Өнгийг илүү зөөлөн саарал болгох */
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-weight: normal;   /* Хэт тод байвал энэ мөрийг нэмээрэй */
+}
+.tet {
+    margin-top: auto; 
+    padding-left: 0;       /* Браузерын үндсэн зайг арилгах */
+    list-style-position: inside; /* Тэмдэглэгээг текстийн хүрээн дотор байлгах */
+    font-size: 14px;
+    color: #444;
+}
+.tet li {
+    margin-bottom: 6px;
+}
+
+.blog-content {
+    width: 80%;
+    margin: auto;
+    padding: 60px 0;
+}
+.blog-left {
+    flex-basis: 50%;
+}
+.blog-left img {
+    width: 100%;
+}
+.blog-left h2 {
+    color: #222;
+    font-weight: 600;
+    margin: 30px 0;
+}
+.blog-left p {
+    color: #999;
+    padding: 0;
+}
+
+.blog-right {
+    flex: 0 0 35%;
+    min-width: 0;
+}
+.blog-right .category-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-right .category-list div {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+.comment-box {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    box-sizing: border-box; /* Энэ нь инпутүүдийг хүрээнээс давж гарахаас сэргийлнэ */
+}
+.blog-right h3 {
+    background: #f44336;
+    color: #fff;
+    padding: 7px 0;
+    font-style: 16px;
+    margin-bottom: 20px;
+}
+.comment-box {
+    border: 1px solid #ccc;
+    margin: 50px 0;
+    padding: 10px 20px;
+}
+.comment-box h3 {
+    text-align: left;
+}
+.comment-form input, .comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background: #f0f0f0;
+}
+.comment-form button {
+    margin: 10px 0;
+}
+@media (max-width: 700px) {
+    .sub-header h1 {
+        font-style: 22px;
+    }
+}
+
+.location {
+    width: 80%;
+    margin: auto;
+    padding: 80px 0;
+}
+.location iframe {
+    width: 100%;
+}
+.contact-us {
+    width: 80%;
+    margin: auto;
+}
+.contact-col {
+    flex-basis: 48%;
+    margin-bottom: 30px;
+}
+.contact-col div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.contact-col div .fa-solid {
+    font-style: 28px;
+    color: #f44336;
+    margin: 10px;
+    margin-right: 30px;
+}
+.contact-col div p {
+    padding: 0;
+}
+.contact-col div h5 {
+    font-style: 20px;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 400;
+}
+.contact-col input, .contact-col textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 17px;
+    outline: none;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Бүтээгдэхүүний картын жигд байрлал */
+.course .row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.product-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+    text-align: left; /* Картын бүх текстийг зүүн талд байрлуулна */
+}
+
+/* Зургийн өндрийг тогтмол болгож жигдрүүлэх */
+.product-card img {
+    width: 100%;
+    height: 180px;          /* Бүх зургийн өндрийг яг ижил болгоно (өөрийн хүссэнээр өөрчилж болно) */
+    object-fit: contain;    /* Зургийн харьцааг гажуудуулахгүйгээр зайнд тааруулна */
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    margin: 10px 0 10px 0;
+    font-size: 20px;
+    color: #222;
+}
+
+.product-card p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Энэ хэсэг нь богино тексттэй картын жагсаалтыг доош нь шахыж, бүх картын ёроолыг тэгшитгэнэ */
+.product-card ul {
+    margin-top: auto; 
+    padding-left: 20px;       /* Жагсаалтын зүүн зайг тохируулах */
+    list-style-position: outside; /* Цэгүүдийг текстийн гадна талд гаргах */
+    text-align: left;         /* Тексийг зүүн тийш шахна */
+    font-size: 13px;
+    color: #444;
+}
+
+.product-card li {
+    margin-bottom: 6px;
+    text-align: left;         /* Жагсаалтын мөр бүрийг зүүн жигдлэх */
+}
+
+/* Сошиал иконуудын загвар (Зураасгүй, цэвэрхэн) */
+.footer .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.footer .icons a {
+    text-decoration: none !important;
+    font-size: 22px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.footer .icons a:hover {
+    color: #f44336;
+}
+
+/* Гарчиг хэсгийн ерөнхий зайг тохируулах */
+.section-title-wrapper {
+    text-align: center;
+    margin-top: 50px;   /* Дээд талын текстээс хэр зайтай байхыг энд нийтэд нь шийднэ */
+    margin-bottom: 30px; /* Картуудаас ямар зайтай байхыг тохируулна */
+}
+
+/* "Давуу талууд" гарчиг */
+.section-title {
+    font-size: 32px;
+    color: #222;
+    margin-bottom: 8px; /* Доод талын дэд тексттэйгээ ойрхон байх зай */
+}
+
+/* "Яагаад Гоник хавтанг сонгох ёстой вэ?" дэд текст */
+.section-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+/* Үндсэн компьютер болон том дэлгэц дээр 3 зэрэгцэнэ */
+.comparison-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Гар утас болон жижиг дэлгэц дээр (768px-ээс бага үед) дээрээс доошоо өрөгдөнө */
+@media (max-width: 768px) {
+    .comparison-images {
+        grid-template-columns: 1fr; /* 1 багана буюу дээрээс доошоо цуврана */
+    }
+}
+
+/* Картуудын ерөнхий холбоос болон текстийн тохиргоо */
+a.course-col {
+    text-decoration: none; /* Доогуур зураасыг арилгах */
+    color: #333;           /* Текстийн өнгийг хүнд эвтэйхэн хар/саарал болгох */
+    display: block;
+}
+
+/* ================================
+   BLOG PAGE
+================================ */
+
+.blog-content {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+.blog-content .row {
+    width: 100%;
+    margin-top: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+/* Зүүн нийтлэл */
+.blog-left {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+}
+
+.blog-left img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.blog-left h2 {
+    color: #222;
+    font-size: 28px;
+    line-height: 1.35;
+    font-weight: 600;
+    margin: 30px 0;
+}
+
+.blog-left p {
+    color: #777;
+    font-size: 15px;
+    line-height: 1.8;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Баруун тал */
+.blog-right {
+    flex: 0 0 35%;
+    width: 35%;
+    min-width: 0;
+}
+
+
+/* Ангиллын хайрцаг */
+.blog-right .category-box {
+    width: 100%;
+    display: block !important;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+
+/* Ангиллын улаан гарчиг */
+.blog-right .category-box > div:first-child {
+    display: block !important;
+    width: 100%;
+    box-sizing: border-box;
+    background: #ff523b;
+    color: #fff;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+/* Ангиллын жагсаалт */
+.blog-right .category-box ul {
+    display: block;
+    list-style: none;
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.blog-right .category-box li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.blog-right .category-box li:last-child {
+    border-bottom: none;
+}
+
+
+/* ================================
+   COMMENT BOX
+================================ */
+
+.blog-right .comment-box {
+    width: 100%;
+    display: block !important;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+
+/* Form-ийн улаан гарчиг */
+.blog-right .comment-box > div:first-child {
+    display: block !important;
+    width: 100%;
+    box-sizing: border-box;
+    background: #ff523b;
+    color: #fff;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+/* Form */
+.blog-right .comment-form {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.blog-right .comment-form input,
+.blog-right .comment-form textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    background: #fff;
+}
+
+.blog-right .comment-form textarea {
+    resize: vertical;
+}
+
+.blog-right .comment-form button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 0;
+    background: #ff523b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.blog-right .comment-form button:hover {
+    background: #e64632;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 768px) {
+
+    .blog-content {
+        width: 90%;
+        padding: 40px 0;
+    }
+
+    .blog-content .row {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .blog-left,
+    .blog-right {
+        width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .blog-left h2 {
+        font-size: 24px;
+    }
+
+    .blog-left p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+}
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .head {
+            background-color: #2563eb;
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.125rem;
+            color: #dbeafe;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: white;
+            color: #2563eb;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Features Section */
+        .features-grid {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        /* Calculator Section */
+        .calculator-section {
+            width: 92%;
+            max-width: 500px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+            padding: 1.5rem;
+        }
+
+        .calculator-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input {
+            width: 100% !important;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        .btn-dark {
+            width: 100%;
+            background-color: #0f172a;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .result-box {
+            margin-top: 1.25rem;
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .result-box.hidden {
+            display: none;
+        }
+
+        .result-title {
+            color: #475569;
+            font-size: 0.875rem;
+        }
+
+        .result-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-top: 0.25rem;
+        }
+
+        .result-note {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        .order-container {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .order-container h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .success-msg {
+            margin-top: 1rem;
+            background-color: #f0fdf4;
+            color: #15803d;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-msg.hidden {
+            display: none;
+        }
+
+        /* ==========================================================================
+   8. FACEBOOK PAGE PLUGIN STYLES
+   ========================================================================== */
+.facebook-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.facebook-title-wrapper {
+    margin-bottom: 30px;
+}
+
+.facebook-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Захиалагчийн булан - Засвар үйлчилгээ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="sub-header">    
+        <nav>
+            <a href="index.html"> <img src="images/logo.png" alt="Logo"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vöhringer.html">Vöhringer</a></li>
+                    <li><a href="gonick.html">Гоник</a></li>
+                    <li><a href="blog.html">Захиалагчийн булан</a></li>
+                    <li><a href="calculator.html">Тооцоолол</a></li>
+                    <li><a href="zasvar.html">Засвар</a></li>
+                    <li><a href="projects.html">Төслүүд</a></li>
+                    <li><a href="contact.html">Холбоо</a></li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+        </nav>                
+        
+        <h1>Засвар хийхэд мэдэх ёстой зөвлөмжүүд</h1>
+    </header>
+
+    <section class="blog-content">
+        <div class="row">
+            
+            <!-- ЗҮҮН ТАЛ -->
+            <div class="blog-left">
+                <img src="images/certificate.jpg" alt="Засварын зөвлөгөө">
+                <h2>Гэр болон оффисын засвар хийхэд анхаарах зүйлс</h2>
+                <p>Засвар хийх гэдэг нь маш их цаг хугацаа, санхүү, сэтгэл санаа шаардсан чухал үйл явц юм. Гэвч олон захиалагчид туршлагагүйн улмаас нэг болон түүнээс дээш алдаа гаргаж, илүү зардал гаргах нь бий. Бид энэ нийтлэлдээ засварын ажлыг ямар ч эрсдэлгүй, чанартай хийлгэхэд туслах зөвлөгөөнүүдийг хүргэж байна.</p>
+                <br>
+                <p><strong>1. Төсвөө нарийн тооцоогүй байх:</strong> Засварын явцад гэнэтийн зардлууд байнга гардаг. Тиймээс үндсэн төсөв дээрээ 10-15 хувийн нөөц хөрөнгө заавал төлөвлөх хэрэгтэй. Манай тооцоолуур хуудсыг ашиглан материалын хэмжээгээ эхлээд нарийн гаргаарай.</p>
+                <br>
+                <p><strong>2. Чанаргүй материалыг хямд гэдэг утгаар нь сонгох:</strong> Паркетан шал, тавилгын хавтан болон бусад суурь материал дээр хэмнэлт хийх нь хожим хэдхэн сарын дараа илүү их засвар хийхэд хүргэдэг. Чанартай, албан ёсны баталгаатай материалыг мэргэжлийн мастеруудаар хийлгэх нь хамгийн зөв шийдэл юм.</p>
+                <br>
+                <p><strong>3. Албан ёсны гэрээ хийхгүй байх:</strong> Ам үгээр тохиролцсон ажил ямар нэгэн баталгаагүй байдаг тул хугацаа алдах, чанар муудах эрсдэлтэй. Манай системээр дамжуулан захиалснаар та албан ёсны гэрээ, баталгааг бүрэн авах боломжтой.</p>
+            </div>
+
+            <!-- БАРУУН ТАЛ -->
+            <div class="blog-right">
+                
+                <!-- Ангиллын жагсаалт -->
+                <div class="category-box" style="background: #fff; border-radius: 8px; border: 1px solid #eee; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow: hidden;">
+                    <!-- Улаан гарчиг (Ямар нэгэн маржин ашиглалгүйгээр хайрцаг дотроо бүтэн орно) -->
+                    <div style="background: #ff523b; color: #fff; padding: 15px; font-weight: bold; font-size: 16px; text-align: center;">
+                        Захиалагчид хэрэгтэй мэдээллүүд
+                    </div>
+                    
+                    <ul style="list-style: none; padding: 15px 20px; margin: 0;">
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                            <span>Засварын үнэ ханш, төсөв</span>
+                            <span style="font-weight: bold; color: #555; background: #f4f4f4; padding: 2px 10px; border-radius: 4px;">21</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                            <span>Материал сонгох зөвлөмж</span>
+                            <span style="font-weight: bold; color: #555; background: #f4f4f4; padding: 2px 10px; border-radius: 4px;">28</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                            <span>Паркетан шал суурилуулах нь</span>
+                            <span style="font-weight: bold; color: #555; background: #f4f4f4; padding: 2px 10px; border-radius: 4px;">15</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                            <span>Тавилгын хавтангийн сонголт</span>
+                            <span style="font-weight: bold; color: #555; background: #f4f4f4; padding: 2px 10px; border-radius: 4px;">34</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                            <span>Мастеруудын зөвлөгөө</span>
+                            <span style="font-weight: bold; color: #555; background: #f4f4f4; padding: 2px 10px; border-radius: 4px;">42</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                            <span>Албан ёсны баталгаа, гэрээ</span>
+                            <span style="font-weight: bold; color: #555; background: #f4f4f4; padding: 2px 10px; border-radius: 4px;">22</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+                            <span>Түгээмэл асуулт хариулт</span>
+                            <span style="font-weight: bold; color: #555; background: #f4f4f4; padding: 2px 10px; border-radius: 4px;">30</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Формын хэсэг -->
+                <div class="comment-box" style="background: #fff; border-radius: 8px; border: 1px solid #eee; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div style="background: #ff523b; color: #fff; padding: 15px; font-weight: bold; font-size: 15px; text-align: center;">
+                        Та асуулт, санал хүсэлтээ бидэнд илгээгээрэй
+                    </div>
+                    <form class="comment-form" style="padding: 20px;">
+                        <input type="text" placeholder="Таны нэр" style="width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                        <input type="email" placeholder="Цахим шуудан" style="width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                        <textarea rows="4" placeholder="Таны асуулт эсвэл сэтгэгдэл..." style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;"></textarea>
+                        <button type="submit" style="width: 100%; padding: 12px; background: #ff523b; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px;">ИЛГЭЭХ</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    
+    <section class="footer">
+        <h4>Бидний тухай</h4>
+        <p>Паркетан шал • Тавилгын хавтан • Интерьерийн бүрэн шийдэл • Захиалга, Зөвлөгөө</p>
+        <div class="icons">
+            <a href="https://www.facebook.com/voehringer.gmbh/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/voehringer_gmbh_und_co._kg/" target="_blank" rel="noopener noreferrer" style="color: #e4405f;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/vöhringer-gmbh-&-co.-kg/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2;"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.youtube.com/watch?v=nw7YdZEaxRw" target="_blank" rel="noopener noreferrer" style="color: #ff0000;"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <p>Made with <i class="fa-regular fa-heart"></i> by Superior Construction XXK, Ulaanbaatar, Mongolia, 2026</p>
+    </section>
+
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() { navLinks.style.right = "0"; }
+        function hideMenu() { navLinks.style.right = "-200px"; }
+    </script>
+
+</body>
+</html>

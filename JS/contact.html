@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Загвар: Товчлууруудыг хамгийн дээр ил харагдуулах бэхэлгээ -->
+    <style>
+      #contact-section {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin: 35px 0;
+        flex-wrap: wrap;
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+        z-index: 999; /* Бусад элементүүдийн дээр ил гаргана */
+      }
+      .contact-btn {
+        padding: 14px 28px;
+        border-radius: 6px;
+        font-weight: bold;
+        text-decoration: none;
+        color: white !important;
+        display: inline-flex;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        transition: transform 0.2s, background-color 0.2s;
+      }
+      .contact-btn:hover {
+        transform: translateY(-2px);
+      }
+      .messenger-btn {
+        background-color: #1877F2 !important; /* Фэйсбүүк цэнхэр */
+      }
+      .messenger-btn:hover {
+        background-color: #145dbf !important;
+      }
+      .phone-btn {
+        background-color: #00A884 !important; /* Ногоон өнгө */
+      }
+      .phone-btn:hover {
+        background-color: #008769 !important;
+      }
+    </style>
+</head>
+
+<body>
+    
+    <header class="sub-header">    
+        <nav>
+            <a href="index.html"> <img src="images/logo.png" alt=""></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vöhringer.html">Vöhringer</a></li>
+                    <li><a href="gonick.html">Гоник</a></li>
+                    <li><a href="blog.html">Захиалагчийн булан</a></li>
+                    <li><a href="calculator.html">Тооцоолол</a></li>
+                    <li><a href="zasvar.html">Засвар</a></li>
+                    <li><a href="projects.html">Төслүүд</a></li>
+                    <li><a href="contact.html">Холбоо</a></li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+        </nav>                    
+        <h1>Contact Us</h1>
+    </header>
+
+    <!-- Холбоо барих гол товчлууруудыг харагдац сайтай хэсэгт шилжүүлэв -->
+    <div id="contact-section">
+      <!-- 📋 ҮҮНИЙГ ХУУЛЖ СОЛИОРОЙ -->
+<a href="https://messenger.com" target="_blank" class="contact-btn messenger-btn">
+  <i class="fa-brands fa-facebook-messenger" style="margin-right: 8px;"></i> Онлайн чатаар захиалах
+</a>
+
+      <a href="tel:+97699215231" class="contact-btn phone-btn">
+        <i class="fa-solid fa-phone" style="margin-right: 8px;"></i> Шууд залгах: 9921-5231
+      </a>
+    </div>
+
+    <section class="location">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.974762870292!2d106.85519357539675!3d47.898173767799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d9693007c3018b7%3A0x88779f71f19d4c89!2sBarilga%20Business%20Center!5e0!3m2!1sen!2smn!4v1785822484876!5m2!1sen!2smn" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </section>
+
+    <section class="contact-us">
+        <div class="row">
+            <div class="contact-col">
+                <div>
+                    <i class="fa-solid fa-house"></i>
+                    <span>
+                        <h5>Барилга Бизнес Төв, Ажилчны гудамж</h5>
+                        <p>ХУД, Улаанбаатар, Монгол</p>
+                    </span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-phone"></i>
+                    <span>
+                        <h5>+976 99215231</h5>
+                        <p>Даваа - Баасан, 10 - 18 цаг</p>
+                    </span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>
+                        <h5>ub3580@gmail.com</h5>
+                        <p>Хүсэлтээ бидэнд илгээгээрэй</p>
+                    </span>
+                </div>
+            </div>
+
+            <div class="contact-col">
+                <form action="form-handler.php" method="post">
+                    <input type="text" name="name" placeholder="Enter your name" required>
+                    <input type="email" name="email" placeholder="Enter your address" required>
+                    <input type="text" name="subject" placeholder="Enter your subject" required>
+                    <textarea rows="8" name="message" placeholder="Message" required></textarea>
+                    <button type="submit" class="hero red-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <section class="footer">
+        <h4>Бидний тухай</h4>
+        <p>Паркетан шал • Тавилгын хавтан • Интерьерийн бүрэн шийдэл • Захиалга, Зөвлөгөө</p>
+
+        <div class="icons">
+            <a href="https://www.facebook.com/voehringer.gmbh/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/voehringer_gmbh_und_co._kg/" target="_blank" rel="noopener noreferrer" style="color: #e4405f;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/v%C3%B6hringer-gmbh-&-co.-kg/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2;"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.youtube.com/watch?v=nw7YdZEaxRw" target="_blank" rel="noopener noreferrer" style="color: #ff0000;"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <p>Made with <i class="fa-regular fa-heart"></i> by Superior Contruction XXK, Ulaanbaatar, Mongolia, 2026</p>
+    </section>
+
+    <!-- Баруун доод буланд байрлах Мессенжер чат плагины суурь -->
+    <div id="fb-root"></div>
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
+
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() { navLinks.style.right = "0"; }
+        function hideMenu() { navLinks.style.right = "-200px"; }
+    </script>
+
+    <!-- Мессенжер чат удирдах Сеньёр JavaScript код -->
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      // ⚠️ Санамж: ТАНАЙ_ХУУДАСНЫ_ID_ДУГААР гэсэн хэсэгт өөрийн Бизнес хуудасны ID тоог тавиарай
+      chatbox.setAttribute("page_id", "123456789012345"); 
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v18.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        // ✅ Фэйсбүүкийн албан ёсны чат унших зөв бүтэн суваг
+        js.src = 'https://facebook.net';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+   
+</body>
+</html>
