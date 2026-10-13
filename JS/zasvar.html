@@ -157,7 +157,58 @@
         </div>
     </section>
 
-    <!-- Хулгана дээгүүр нь гүйнгүүт томрох (Hover Zoom) хайрцаг -->
+    <    <!-- ГАЛЕРЕЙ СЕКЦ -->
+    <section class="gallery-section" style="width: 80%; max-width: 1200px; margin: 60px auto; text-align: center; padding: 0; box-sizing: border-box;">
+        <h2 style="font-size: 1.6rem; color: #1e3a8a; margin-bottom: 10px; font-weight:600;">Бидний хийсэн ажлууд</h2>
+        <p style="color: #777; margin-bottom: 40px;">Хийсэн ажлын зураг, видео мэдээллийг эндээс үзээрэй</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="images/work1.jpg" alt="Ажлын зураг 1"></div>
+            <div class="gallery-item"><img src="images/work2.jpg" alt="Ажлын зураг 2"></div>
+            <div class="gallery-item"><img src="images/work3.jpg" alt="Ажлын зураг 3"></div>
+            <div class="gallery-item"><img src="images/work4.jpg" alt="Ажлын зураг 4"></div>
+            <div class="gallery-item"><img src="images/work5.jpg" alt="Ажлын зураг 5"></div>
+            <div class="gallery-item"><img src="images/work6.jpg" alt="Ажлын зураг 6"></div>
+            <div class="gallery-item"><img src="images/work7.jpg" alt="Ажлын зураг 7"></div>
+            <div class="gallery-item"><img src="images/work8.jpg" alt="Ажлын зураг 8"></div>
+            <div class="gallery-item"><img src="images/work9.jpg" alt="Ажлын зураг 9"></div>
+            <div class="gallery-item"><img src="images/work10.jpg" alt="Ажлын зураг 10"></div>
+            <div class="gallery-item"><img src="images/work11.jpg" alt="Ажлын зураг 11"></div>
+            <div class="gallery-item"><img src="images/work12.jpg" alt="Ажлын зураг 12"></div>
+            <div class="gallery-item"><img src="images/work13.jpg" alt="Ажлын зураг 13"></div>
+            <div class="gallery-item"><img src="images/work14.jpg" alt="Ажлын зураг 14"></div>
+            <div class="gallery-item"><img src="images/work15.jpg" alt="Ажлын зураг 15"></div>
+            <div class="gallery-item"><img src="images/work16.jpg" alt="Ажлын зураг 16"></div>
+            <div class="gallery-item"><img src="images/work17.jpg" alt="Ажлын зураг 17"></div>
+            <div class="gallery-item"><img src="images/work18.jpg" alt="Ажлын зураг 18"></div>
+            <div class="gallery-item"><img src="images/work19.jpg" alt="Ажлын зураг 19"></div>
+            <div class="gallery-item"><img src="images/work20.jpg" alt="Ажлын зураг 20"></div>
+            <div class="gallery-item"><img src="images/work21.jpg" alt="Ажлын зураг 21"></div>
+            <div class="gallery-item"><img src="images/work22.jpg" alt="Ажлын зураг 22"></div>
+            <div class="gallery-item"><img src="images/work23.jpg" alt="Ажлын зураг 23"></div>
+            <div class="gallery-item"><img src="images/work24.jpg" alt="Ажлын зураг 24"></div>
+            <div class="gallery-item"><img src="images/work25.jpg" alt="Ажлын зураг 25"></div>
+            <div class="gallery-item"><img src="images/work26.jpg" alt="Ажлын зураг 26"></div>
+            <div class="gallery-item"><img src="images/work27.jpg" alt="Ажлын зураг 27"></div>
+            <div class="gallery-item"><img src="images/work28.jpg" alt="Ажлын зураг 28"></div>
+            <div class="gallery-item"><img src="images/work29.jpg" alt="Ажлын зураг 29"></div>
+            <div class="gallery-item"><img src="images/work30.jpg" alt="Ажлын зураг 30"></div>
+            <div class="gallery-item"><img src="images/work31.jpg" alt="Ажлын зураг 31"></div>
+            <div class="gallery-item"><img src="images/work32.jpg" alt="Ажлын зураг 32"></div>
+            <div class="gallery-item"><img src="images/work33.jpg" alt="Ажлын зураг 33"></div>
+            <div class="gallery-item"><img src="images/work34.jpg" alt="Ажлын зураг 34"></div>
+            <div class="gallery-item"><img src="images/work35.jpg" alt="Ажлын зураг 35"></div>
+            <div class="gallery-item"><img src="images/work36.jpg" alt="Ажлын зураг 36"></div>
+        </div>
+        
+        <div style="margin-top: 40px;">
+            <a href="https://www.facebook.com/profile.php?id=61593636466858" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1877f2 0%, #0a56bd 100%); color: white; font-weight: 600; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3); transition: all 0.3s ease;">
+                <i class="fa-brands fa-facebook" style="margin-right: 12px; font-size: 1.5rem;"></i> Бүх зургийг Facebook-ээс үзэх
+            </a>
+        </div>
+    </section>
+
+    <!-- Хулгана дээгүүр нь гүйнгүүт дэлгэц дүүрэн томрох (Hover Zoom) хайрцаг -->
     <div id="hover-zoom" class="hover-zoom">
         <img id="hover-zoom-img" src="" alt="Томруулсан зураг">
     </div>
@@ -180,13 +231,15 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease;
             cursor: pointer;
+            /* Өндөр, өргөний харьцааг хадгалах */
+            aspect-ratio: 4 / 3;
         }
 
-        /* Зургийн үндсэн хэмжээ - маш жижиг */
+        /* Зургийн үндсэн хэмжээ - өндөр, өргөний харьцааг хадгална */
         .gallery-item img {
             width: 100%;
-            height: 80px; /* Маш жижиг */
-            object-fit: cover;
+            height: 100%;
+            object-fit: cover; /* Зургийг хайрцагт тохируулах */
             display: block;
             transition: transform 0.2s ease;
         }
@@ -200,7 +253,7 @@
             transform: scale(1.1);
         }
 
-        /* ===== Хулгана дээгүүр нь гүйнгүүт томрох (Hover Zoom Preview) ===== */
+        /* ===== Хулгана дээгүүр нь гүйнгүүт дэлгэц дүүрэн томрох ===== */
         .hover-zoom {
             display: none; /* Анхдагчаар нуугдсан */
             position: fixed;
@@ -211,6 +264,9 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             border: 3px solid white;
             transition: opacity 0.2s ease;
+            /* Дэлгэцийн 90% хэмжээтэй */
+            max-width: 90vw;
+            max-height: 90vh;
         }
 
         .hover-zoom.active {
@@ -219,11 +275,9 @@
 
         .hover-zoom img {
             display: block;
-            max-width: 500px;
-            max-height: 500px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Зургийг бүтнээр харуулах */
         }
 
         /* ===== Гар утсанд тохируулах (Responsive) ===== */
@@ -238,8 +292,8 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: 6px;
             }
-            .gallery-item img {
-                height: 70px;
+            .gallery-item {
+                aspect-ratio: 4 / 3;
             }
             .hover-zoom {
                 display: none !important; /* Гар утсанд hover ажиллахгүй */
@@ -250,9 +304,6 @@
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 6px;
-            }
-            .gallery-item img {
-                height: 90px;
             }
         }
     </style>
@@ -323,8 +374,8 @@
 
                 // Хулгана хөдлөхөд хамт хөдөлнө
                 img.addEventListener('mousemove', function(e) {
-                    const zoomWidth = 500;
-                    const zoomHeight = 500;
+                    const zoomWidth = window.innerWidth * 0.9;  // Дэлгэцийн 90%
+                    const zoomHeight = window.innerHeight * 0.9; // Дэлгэцийн 90%
                     let x = e.clientX + 20;
                     let y = e.clientY - zoomHeight / 2;
 
