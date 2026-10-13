@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Обой & SPC Шал Угсралт - Засвар</title>
     <style>
-        /* --- ГАЛЕРЕЙ СЕКЦИЙН CSS ЗАСВАР --- */
+        /* --- ЕРӨНХИЙ --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
 
-        /* 1. Секцийг 80% өргөнтэй болгож, хоёр захнаас нь голлуулах */
+        /* --- ГАЛЕРЕЙ СЕКЦИЙН CSS --- */
         .gallery-section {
             width: 80%;
-            margin: 50px auto; /* Дээд доод талдаа 50px, хоёр хажуугаасаа автоматаар голлогдоно */
-            font-family: sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
             text-align: center;
         }
 
         .gallery-section h2 {
             font-size: 2rem;
-            color: #1a202c;
+            color: #1e3a8a;
             margin-bottom: 10px;
         }
 
@@ -27,117 +34,227 @@
             font-size: 1rem;
         }
 
-        /* 2. Зургуудыг байршуулах уян хатан Grid бүтэц (Одоогийнхоос 2 дахин жижиг) */
+        /* --- ГАЛЕРЕЙН GRID --- */
         .gallery-grid {
             display: grid;
-            /* Зургийн хамгийн бага өргөнийг 150px болгож жижигсгэв. Дэлгэцийн хэмжээнд таарч баганын тоо өөрчлөгдөнө */
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px; /* Зургууд хоорондын зай */
+            grid-template-columns: repeat(5, 1fr); /* 5 багана */
+            gap: 10px;
         }
 
-        /* 3. Зургийн харьцааг алдуулахгүй хадгалах container */
+        /* --- ЗУРГИЙН ХАЙРЦАГ --- */
         .gallery-item {
-            position: relative;
-            border-radius: 6px;
             overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            aspect-ratio: 4 / 3; /* Зургийн харьцаа хадгална */
         }
 
         .gallery-item img {
             width: 100%;
-            height: 120px; /* Өндрийг тогтмол барьж харьцаа алдуулахгүй */
-            object-fit: cover; /* Зургийг сунгаж гажуудуулахгүйгээр тааруулж зүснэ */
+            height: 100%;
+            object-fit: cover;
             display: block;
             transition: transform 0.2s ease;
         }
 
-        /* Хулгана очих үед бага зэрэг тодрох эффект (Үндсэн grid дотор) */
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* 4. ХУЛГАНА ОЧИХОД ДЭЛГЭЦ ДҮҮРЭН ТОМРОХ ЭФФЕКТ (Lightbox overlay) */
         .gallery-item:hover {
-            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
 
-        /* Хулгана очих үед зургийг дэлгэцийн өмнө авчирч томруулах */
         .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* --- HOVER ZOOM (Дэлгэц дүүрэн томрох) --- */
+        .hover-zoom {
+            display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            width: auto;
-            height: auto;
-            max-width: 90vw;   /* Дэлгэцийн өргөний 90%-аас хэтрэхгүй */
-            max-height: 90vh;  /* Дэлгэцийн өндрийн 90%-аас хэтрэхгүй */
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            z-index: 9999;
+            pointer-events: none;
             border-radius: 8px;
-            border: 3px solid #fff;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 3px solid white;
+            max-width: 90vw;
+            max-height: 90vh;
+            background-color: #000;
         }
 
-        /* Зургийг томрох үед арын сайтыг бүдгэрүүлж харанхуй болгох дэвсгэр */
-        .gallery-item:hover::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.7); /* Арын хэсгийг 70% харанхуй болгоно */
-            z-index: -1;
+        .hover-zoom.active {
+            display: block;
         }
 
-        /* Facebook рүү шилжих товчны загвар */
+        .hover-zoom img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* --- FACEBOOK ТОВЧ --- */
         .fb-btn-container {
             margin-top: 40px;
         }
 
         .fb-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 12px 30px;
-            background-color: #1877f2;
+            background: linear-gradient(135deg, #1877f2 0%, #0a56bd 100%);
             color: white;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 50px;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3);
         }
 
         .fb-btn:hover {
-            background-color: #166fe5;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(24, 119, 242, 0.4);
+        }
+
+        .fb-btn i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* --- RESPONSIVE (Гар утсанд тохируулах) --- */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .gallery-section {
+                width: 90%;
+            }
+            .hover-zoom {
+                display: none !important; /* Гар утсанд hover ажиллахгүй */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            .gallery-section h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
+    <!-- FontAwesome линк -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- ГАЛЕРЕЙ СЕКЦ БҮТНЭЭРЭЭ -->
+    <!-- ГАЛЕРЕЙ СЕКЦ -->
     <section class="gallery-section">
         <h2>Бидний хийсэн ажлууд</h2>
         <p>Хийсэн ажлын зураг, видео мэдээллийг эндээс үзээрэй</p>
         
         <div class="gallery-grid">
-            <!-- Зургуудын жагсаалт (src="..." хэсэгт зургийнхаа замыг оруулна уу) -->
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 1"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 2"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 3"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 4"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 5"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 6"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 7"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 8"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 9"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 10"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 11"></div>
-            <div class="gallery-item"><img src="https://placeholder.com" alt="Ажлын зураг 12"></div>
-            <!-- Шаардлагатай бол доор нь нэмж хуулж тавиад зургийн замаа солиорой -->
+            <div class="gallery-item"><img src="images/work1.jpg" alt="Ажлын зураг 1"></div>
+            <div class="gallery-item"><img src="images/work2.jpg" alt="Ажлын зураг 2"></div>
+            <div class="gallery-item"><img src="images/work3.jpg" alt="Ажлын зураг 3"></div>
+            <div class="gallery-item"><img src="images/work4.jpg" alt="Ажлын зураг 4"></div>
+            <div class="gallery-item"><img src="images/work5.jpg" alt="Ажлын зураг 5"></div>
+            <div class="gallery-item"><img src="images/work6.jpg" alt="Ажлын зураг 6"></div>
+            <div class="gallery-item"><img src="images/work7.jpg" alt="Ажлын зураг 7"></div>
+            <div class="gallery-item"><img src="images/work8.jpg" alt="Ажлын зураг 8"></div>
+            <div class="gallery-item"><img src="images/work9.jpg" alt="Ажлын зураг 9"></div>
+            <div class="gallery-item"><img src="images/work10.jpg" alt="Ажлын зураг 10"></div>
+            <div class="gallery-item"><img src="images/work11.jpg" alt="Ажлын зураг 11"></div>
+            <div class="gallery-item"><img src="images/work12.jpg" alt="Ажлын зураг 12"></div>
+            <div class="gallery-item"><img src="images/work13.jpg" alt="Ажлын зураг 13"></div>
+            <div class="gallery-item"><img src="images/work14.jpg" alt="Ажлын зураг 14"></div>
+            <div class="gallery-item"><img src="images/work15.jpg" alt="Ажлын зураг 15"></div>
+            <div class="gallery-item"><img src="images/work16.jpg" alt="Ажлын зураг 16"></div>
+            <div class="gallery-item"><img src="images/work17.jpg" alt="Ажлын зураг 17"></div>
+            <div class="gallery-item"><img src="images/work18.jpg" alt="Ажлын зураг 18"></div>
+            <div class="gallery-item"><img src="images/work19.jpg" alt="Ажлын зураг 19"></div>
+            <div class="gallery-item"><img src="images/work20.jpg" alt="Ажлын зураг 20"></div>
+            <div class="gallery-item"><img src="images/work21.jpg" alt="Ажлын зураг 21"></div>
+            <div class="gallery-item"><img src="images/work22.jpg" alt="Ажлын зураг 22"></div>
+            <div class="gallery-item"><img src="images/work23.jpg" alt="Ажлын зураг 23"></div>
+            <div class="gallery-item"><img src="images/work24.jpg" alt="Ажлын зураг 24"></div>
+            <div class="gallery-item"><img src="images/work25.jpg" alt="Ажлын зураг 25"></div>
+            <div class="gallery-item"><img src="images/work26.jpg" alt="Ажлын зураг 26"></div>
+            <div class="gallery-item"><img src="images/work27.jpg" alt="Ажлын зураг 27"></div>
+            <div class="gallery-item"><img src="images/work28.jpg" alt="Ажлын зураг 28"></div>
+            <div class="gallery-item"><img src="images/work29.jpg" alt="Ажлын зураг 29"></div>
+            <div class="gallery-item"><img src="images/work30.jpg" alt="Ажлын зураг 30"></div>
+            <div class="gallery-item"><img src="images/work31.jpg" alt="Ажлын зураг 31"></div>
+            <div class="gallery-item"><img src="images/work32.jpg" alt="Ажлын зураг 32"></div>
+            <div class="gallery-item"><img src="images/work33.jpg" alt="Ажлын зураг 33"></div>
+            <div class="gallery-item"><img src="images/work34.jpg" alt="Ажлын зураг 34"></div>
+            <div class="gallery-item"><img src="images/work35.jpg" alt="Ажлын зураг 35"></div>
+            <div class="gallery-item"><img src="images/work36.jpg" alt="Ажлын зураг 36"></div>
         </div>
 
         <div class="fb-btn-container">
-            <a href="#" class="fb-btn">Бүх зургийг Facebook-ээс үзэх</a>
+            <a href="https://www.facebook.com/profile.php?id=61593636466858" target="_blank" class="fb-btn">
+                <i class="fa-brands fa-facebook"></i> Бүх зургийг Facebook-ээс үзэх
+            </a>
         </div>
     </section>
 
+    <!-- HOVER ZOOM ХАЙРЦАГ -->
+    <div id="hover-zoom" class="hover-zoom">
+        <img id="hover-zoom-img" src="" alt="Томруулсан зураг">
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Hover Zoom функц
+        const hoverZoom = document.getElementById('hover-zoom');
+        const hoverZoomImg = document.getElementById('hover-zoom-img');
+        const galleryImages = document.querySelectorAll('.gallery-item img');
+
+        // Зөвхөн компьютер дээр ажиллана
+        if (window.innerWidth > 768) {
+            galleryImages.forEach(img => {
+                // Хулгана дээгүүр нь очиход
+                img.addEventListener('mouseenter', function() {
+                    hoverZoomImg.src = this.src;
+                    hoverZoom.classList.add('active');
+                });
+
+                // Хулгана хөдлөхөд хамт хөдөлнө
+                img.addEventListener('mousemove', function(e) {
+                    const zoomWidth = window.innerWidth * 0.9;
+                    const zoomHeight = window.innerHeight * 0.9;
+                    let x = e.clientX + 20;
+                    let y = e.clientY - zoomHeight / 2;
+
+                    if (x + zoomWidth > window.innerWidth) {
+                        x = e.clientX - zoomWidth - 20;
+                    }
+                    if (y < 0) y = 10;
+                    if (y + zoomHeight > window.innerHeight) {
+                        y = window.innerHeight - zoomHeight - 10;
+                    }
+
+                    hoverZoom.style.left = x + 'px';
+                    hoverZoom.style.top = y + 'px';
+                });
+
+                // Хулгана гарахад нуух
+                img.addEventListener('mouseleave', function() {
+                    hoverZoom.classList.remove('active');
+                });
+            });
+        }
+    </script>
 </body>
 </html>
