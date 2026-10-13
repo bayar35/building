@@ -1,165 +1,342 @@
 <!DOCTYPE html>
-<html lang="mn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обой & SPC Шал Угсралт - Засвар</title>
+    <title>Обой & SPC Шал Угсралтын Үйлчилгээ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* --- ЕРӨНХИЙ --- */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-        }
-
-        /* --- ГАЛЕРЕЙ СЕКЦИЙН CSS --- */
+        /* --- НЭМЭЛТ CSS (Галерей, Видео, Чатбот) --- */
         .gallery-section {
-            width: 80%;
+            width: 90%;
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 60px auto;
             text-align: center;
         }
-
         .gallery-section h2 {
             font-size: 2rem;
-            color: #1e3a8a;
+            color: #1a202c;
             margin-bottom: 10px;
         }
-
         .gallery-section p {
             color: #718096;
             margin-bottom: 40px;
-            font-size: 1rem;
         }
-
-        /* --- ГАЛЕРЕЙН GRID --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 багана */
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
         }
-
-        /* --- ЗУРГИЙН ХАЙРЦАГ --- */
         .gallery-item {
-            overflow: hidden;
+            position: relative;
             border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease;
+            overflow: hidden;
             cursor: pointer;
-            aspect-ratio: 4 / 3; /* Зургийн харьцаа хадгална */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.2s ease;
-        }
-
         .gallery-item:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.03);
             z-index: 10;
         }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* --- HOVER ZOOM (Дэлгэц дүүрэн томрох) --- */
-        .hover-zoom {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            pointer-events: none;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            border: 3px solid white;
-            max-width: 90vw;
-            max-height: 90vh;
-            background-color: #000;
-        }
-
-        .hover-zoom.active {
-            display: block;
-        }
-
-        .hover-zoom img {
-            display: block;
+        .gallery-item img {
             width: 100%;
-            height: 100%;
-            object-fit: contain;
+            height: 120px;
+            object-fit: cover;
+            display: block;
         }
-
-        /* --- FACEBOOK ТОВЧ --- */
         .fb-btn-container {
             margin-top: 40px;
         }
-
         .fb-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #1877f2 0%, #0a56bd 100%);
+            display: inline-block;
+            padding: 14px 35px;
+            background-color: #1877f2;
             color: white;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 30px;
             font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3);
+            font-size: 1rem;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(24,119,242,0.3);
         }
-
         .fb-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(24, 119, 242, 0.4);
+            background-color: #166fe5;
+            transform: translateY(-2px);
         }
 
-        .fb-btn i {
-            margin-right: 10px;
-            font-size: 1.3rem;
+        .video-section {
+            width: 90%;
+            max-width: 1200px;
+            margin: 60px auto;
+            text-align: center;
+        }
+        .video-section h2 {
+            font-size: 2rem;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+        .video-section p {
+            color: #718096;
+            margin-bottom: 40px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .video-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .video-item iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
         }
 
-        /* --- RESPONSIVE (Гар утсанд тохируулах) --- */
-        @media (max-width: 1024px) {
-            .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
+        /* --- CHATBOT --- */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+            z-index: 9999;
+            transition: transform 0.2s, background 0.3s;
         }
-
-        @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
-            }
-            .gallery-section {
-                width: 90%;
-            }
-            .hover-zoom {
-                display: none !important; /* Гар утсанд hover ажиллахгүй */
-            }
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            background: #1d4ed8;
         }
-
-        @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-            }
-            .gallery-section h2 {
-                font-size: 1.5rem;
+        .chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 350px;
+            max-width: 90vw;
+            height: 450px;
+            max-height: 70vh;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 9999;
+            border: 1px solid #e2e8f0;
+        }
+        .chatbot-window.open {
+            display: flex;
+        }
+        .chatbot-header {
+            background: #2563eb;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-header h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        .chatbot-header button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f7fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chatbot-msg {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .chatbot-msg.bot {
+            background: #e2e8f0;
+            color: #1a202c;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .chatbot-msg.user {
+            background: #2563eb;
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .chatbot-input {
+            display: flex;
+            border-top: 1px solid #e2e8f0;
+        }
+        .chatbot-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        .chatbot-input button {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .chatbot-input button:hover {
+            background: #1d4ed8;
+        }
+        .chatbot-quick {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 10px 15px;
+            background: #fff;
+            border-top: 1px solid #e2e8f0;
+        }
+        .chatbot-quick button {
+            background: #ebf8ff;
+            color: #2563eb;
+            border: 1px solid #bee3f8;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .chatbot-quick button:hover {
+            background: #bee3f8;
+        }
+        @media (max-width: 500px) {
+            .chatbot-window {
+                width: 95vw;
+                right: 2.5vw;
             }
         }
     </style>
-    <!-- FontAwesome линк -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 
-    <!-- ГАЛЕРЕЙ СЕКЦ -->
-    <section class="gallery-section">
+    <header class="sub-header">    
+        <nav>
+            <a href="logo"> <img src="images/logo.png" alt=""></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="vöhringer.html">Vöhringer</a></li>
+                    <li><a href="gonick.html">Гоник</a></li>
+                    <li><a href="blog.html">Захиалагчийн булан</a></li>
+                    <li><a href="calculator.html">Тооцоолол</a></li>
+                    <li><a href="zasvar.html">Засвар</a></li>
+                    <li><a href="projects.html">Төслүүд</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+        </nav>                    
+       <h1>Обой наалт болон SPC шал угсралт</h1>
+    </header>
+
+    <header class="head">
+        <div class="container">
+            <p>Найдвартай үйлчилгээг нэг дороос</p>
+            <a href="#calculator" class="btn-primary">Үнэ тооцоолох & Захиалах</a>
+        </div>
+    </header>
+
+    <section class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-paint-roller" style="color: #2563eb;"></i></div>
+            <h3>Чанар сайтай обой</h3>
+            <p>Флизелин болон винил суурьтай угаадаг обойг төгс наана.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-border-all" style="color: #2563eb;"></i></div>
+            <h3>SPC шал угсралт</h3>
+            <p>Цэвэрхэн, хурдан бөгөөд усны хамгаалалттай орчин үеийн шал.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-building-user" style="color: #2563eb;"></i></div>
+            <h3>Баталгаат мастерууд</h3>
+            <p>Туршлагатай бригад цаг тухайд нь чанартай хүлээлгэж өгнө.</p>
+        </div>
+    </section>
+
+    <!-- CALCULATOR & BOOKING SECTION -->
+    <section id="calculator" class="calculator-section">
+        <h2>Урьдчилсан Үнийн Тооцоолуур</h2>        
+        <div>
+            <div class="form-group">
+                <label>Обой орох рулон тоо:</label>
+                <input type="number" id="rolls" placeholder="Жишээ нь: 10">
+            </div>
+            <div class="form-group">
+                <label>SPC шал угсрах талбай (м.кв):</label>
+                <input type="number" id="floorM2" placeholder="Жишээ нь: 40">
+            </div>
+            <button onclick="calculatePrice()" class="btn-dark">Үнийг тооцох</button>
+            <div id="resultBox" class="result-box hidden">
+                <p class="result-title">Тооцоолсон урьдчилсан дүнгээр:</p>
+                <p id="totalPrice" class="result-price">0 ₮</p>
+                <p class="result-note">* Материал болон ажлын хөлс нийлсэн ойролцоо дүнгээр тооцов.</p>
+            </div>
+        </div>
+
+        <div class="order-container">
+            <h3>Захиалга өгөх</h3>
+            <form id="orderForm" onsubmit="sendOrder(event)">
+                <div class="form-group">
+                    <label style="font-size: 0.875rem;">Таны нэр:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 0.875rem;">Утасны дугаар:</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 0.875rem;">Хаяг (Байр / Хороолол):</label>
+                    <input type="text" id="address" required>
+                </div>
+                <button type="submit" class="btn-submit">Захиалга илгээх</button>
+            </form>
+            <div id="successMsg" class="success-msg hidden">
+                Амжилттай захиалга илгээгдлээ! Бид тун удахгүй тантай холбогдох болно.
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ГАЛЕРЕЙ СЕКЦ - 36 ЗУРАГ -->
+    <!-- ============================================================ -->
+    <section class="gallery-section" id="gallery">
         <h2>Бидний хийсэн ажлууд</h2>
         <p>Хийсэн ажлын зураг, видео мэдээллийг эндээс үзээрэй</p>
         
@@ -203,58 +380,198 @@
         </div>
 
         <div class="fb-btn-container">
-            <a href="https://www.facebook.com/profile.php?id=61593636466858" target="_blank" class="fb-btn">
-                <i class="fa-brands fa-facebook"></i> Бүх зургийг Facebook-ээс үзэх
-            </a>
+            <!-- Энд Барилгачин Гэр Бүлийн Facebook пейж руу шилжинэ -->
+            <a href="https://www.facebook.com/profile.php?id=61560788698223" target="_blank" class="fb-btn">Бүх зургийг Facebook-ээс үзэх</a>
         </div>
     </section>
 
-    <!-- HOVER ZOOM ХАЙРЦАГ -->
-    <div id="hover-zoom" class="hover-zoom">
-        <img id="hover-zoom-img" src="" alt="Томруулсан зураг">
+    <!-- ============================================================ -->
+    <!-- ВИДЕО СЕКЦ -->
+    <!-- ============================================================ -->
+    <section class="video-section" id="video">
+        <h2>Бидний видео</h2>
+        <p>Хийсэн ажлын видео мэдээллийг эндээс үзээрэй</p>
+        
+        <div class="video-grid">
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/PCpZbKbKVe8" allowfullscreen></iframe>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/mBikRoJLjmE?start=69" allowfullscreen></iframe>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/qRH-pCIGFb8" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACEBOOK PAGE SECTION -->
+    <section class="facebook-section">
+        <div class="facebook-title-wrapper">
+            <h2 class="section-title">Манай Facebook Хуудас</h2>
+            <p class="section-subtitle">Шинэ бүтээгдэхүүн, зураг, видео мэдээллийг цаг тухайд нь аваарай</p>
+        </div>
+        
+        <div class="facebook-container">
+            <div class="fb-page" 
+              data-href="https://www.facebook.com/profile.php?id=61560788698223" 
+              data-tabs="timeline" 
+              data-width="450" 
+              data-height="500" 
+              data-small-header="false" 
+              data-adapt-container-width="true" 
+              data-hide-cover="false" 
+              data-show-facepile="true">
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <h4>Бидний тухай</h4>
+        <p>Паркетан шал • Тавилгын хавтан • Интерьерийн бүрэн шийдэл • Захиалга, Зөвлөгөө</p>
+
+        <div class="icons">
+            <a href="https://www.facebook.com/voehringer.gmbh/" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/voehringer_gmbh_und_co._kg/" target="_blank" rel="noopener noreferrer" style="color: #e4405f;">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/vöhringer-gmbh-&-co.-kg/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2;">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://www.youtube.com/watch?v=nw7YdZEaxRw" target="_blank" rel="noopener noreferrer" style="color: #ff0000;">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+        <p>Made with <i class="fa-regular fa-heart"></i> by Superior Contruction XXK, Ulaanbaatar, Mongolia, 2026</p>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CHATBOT - Bagi Service -->
+    <!-- ============================================================ -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fa-solid fa-comment-dots"></i>
+    </button>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h4><i class="fa-solid fa-robot"></i> Bagi Service</h4>
+            <button onclick="toggleChatbot()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chatbot-msg bot">
+                Сайн байна уу? Би <strong>Bagi Service</strong> чатбот. Та обой наах, SPC шал угсралтын талаар асууж болно. 😊
+            </div>
+        </div>
+        <div class="chatbot-quick">
+            <button onclick="quickReply('Обой наах үнэ')">Обой наах үнэ</button>
+            <button onclick="quickReply('SPC шал үнэ')">SPC шал үнэ</button>
+            <button onclick="quickReply('Захиалга өгөх')">Захиалга өгөх</button>
+            <button onclick="quickReply('Холбоо барих')">Холбоо барих</button>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Мессеж бичих..." onkeypress="handleChatKey(event)">
+            <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- ============================================================ -->
+    <!-- SCRIPT -->
+    <!-- ============================================================ -->
     <script>
-        // Hover Zoom функц
-        const hoverZoom = document.getElementById('hover-zoom');
-        const hoverZoomImg = document.getElementById('hover-zoom-img');
-        const galleryImages = document.querySelectorAll('.gallery-item img');
+        // --- NAVIGATION ---
+        var navLinks = document.getElementById("navLinks");
+        function showMenu() { navLinks.style.right = "0"; }
+        function hideMenu() { navLinks.style.right = "-200px"; }
 
-        // Зөвхөн компьютер дээр ажиллана
-        if (window.innerWidth > 768) {
-            galleryImages.forEach(img => {
-                // Хулгана дээгүүр нь очиход
-                img.addEventListener('mouseenter', function() {
-                    hoverZoomImg.src = this.src;
-                    hoverZoom.classList.add('active');
-                });
+        // --- CALCULATOR ---
+        function calculatePrice() {
+            let rolls = document.getElementById("rolls").value;
+            let floorM2 = document.getElementById("floorM2").value;
+            let rollPrice = 15000;
+            let floorPrice = 25000;
+            let total = (rolls * rollPrice) + (floorM2 * floorPrice);
+            let resultBox = document.getElementById("resultBox");
+            let totalPriceElem = document.getElementById("totalPrice");
+            if(total > 0) {
+                totalPriceElem.innerText = total.toLocaleString() + " ₮";
+                resultBox.classList.remove("hidden");
+            } else {
+                alert("Та тоо хэмжээг оруулна уу.");
+            }
+        }
 
-                // Хулгана хөдлөхөд хамт хөдөлнө
-                img.addEventListener('mousemove', function(e) {
-                    const zoomWidth = window.innerWidth * 0.9;
-                    const zoomHeight = window.innerHeight * 0.9;
-                    let x = e.clientX + 20;
-                    let y = e.clientY - zoomHeight / 2;
+        // --- ORDER FORM ---
+        function sendOrder(event) {
+            event.preventDefault();
+            document.getElementById("successMsg").classList.remove("hidden");
+            document.getElementById("orderForm").reset();
+        }
 
-                    if (x + zoomWidth > window.innerWidth) {
-                        x = e.clientX - zoomWidth - 20;
-                    }
-                    if (y < 0) y = 10;
-                    if (y + zoomHeight > window.innerHeight) {
-                        y = window.innerHeight - zoomHeight - 10;
-                    }
+        // --- CHATBOT ---
+        function toggleChatbot() {
+            document.getElementById("chatbotWindow").classList.toggle("open");
+        }
 
-                    hoverZoom.style.left = x + 'px';
-                    hoverZoom.style.top = y + 'px';
-                });
+        function handleChatKey(event) {
+            if (event.key === "Enter") sendChatMessage();
+        }
 
-                // Хулгана гарахад нуух
-                img.addEventListener('mouseleave', function() {
-                    hoverZoom.classList.remove('active');
-                });
-            });
+        function sendChatMessage() {
+            const input = document.getElementById("chatbotInput");
+            const msg = input.value.trim();
+            if (msg === "") return;
+            addChatMessage(msg, "user");
+            input.value = "";
+            setTimeout(() => {
+                addChatMessage(getBotReply(msg), "bot");
+            }, 500);
+        }
+
+        function quickReply(text) {
+            addChatMessage(text, "user");
+            setTimeout(() => {
+                addChatMessage(getBotReply(text), "bot");
+            }, 500);
+        }
+
+        function addChatMessage(text, sender) {
+            const container = document.getElementById("chatbotMessages");
+            const div = document.createElement("div");
+            div.className = "chatbot-msg " + sender;
+            div.innerHTML = text;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function getBotReply(msg) {
+            const m = msg.toLowerCase();
+            if (m.includes("обой") && m.includes("үнэ")) {
+                return "Обой наах үнэ: 1 рулон (5.3 м²) тутамд 15,000₮-өөс эхэлнэ. Нарийн үнийг өрөөний хэмжээгээр тооцно. Тооцоолуур ашиглахыг зөвлөж байна.";
+            }
+            if (m.includes("spc") || m.includes("шал")) {
+                return "SPC шал угсралт: 1 м² талбайд 25,000₮-өөс эхэлнэ. Материал болон ажлын хөлс багтсан. Үнэ тооцоолуур ашиглана уу.";
+            }
+            if (m.includes("захиалга")) {
+                return "Захиалга өгөхийн тулд 'Урьдчилсан Үнийн Тооцоолуур' хэсэгт мэдээллээ бөглөөд 'Захиалга илгээх' товчийг дарна уу. Эсвэл 9921-5231 дугаарт залгаарай.";
+            }
+            if (m.includes("холбоо") || m.includes("утас")) {
+                return "Холбоо барих: 📞 9921-5231. Хаяг: Барилга Бизнес Төв, Ажилчны гудамж, ХУД, Улаанбаатар.";
+            }
+            if (m.includes("цаг") || m.includes("ажил")) {
+                return "Ажлын цаг: Даваа - Бямба, 08:00 - 20:00. Ням гарагт амарна.";
+            }
+            if (m.includes("баярлалаа") || m.includes("thank")) {
+                return "Баярлалаа! Танд амжилт хүсье. 😊";
+            }
+            return "Уучлаарай, би ойлгосонгүй. Та 'Обой наах үнэ', 'SPC шал үнэ', 'Захиалга өгөх', 'Холбоо барих' гэж асууж болно.";
         }
     </script>
+
+    <!-- Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"></script>
+
 </body>
 </html>
