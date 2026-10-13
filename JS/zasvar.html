@@ -88,6 +88,8 @@
             <div class="result-note" style="font-size: 0.75rem; color: #94a3b8; margin-top: 5px;">* Энэхүү үнэд материалын зардал ороогүй болно.</div>
         </div>
 
+        
+
         <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
 
         <h2>Захиалга өгөх</h2>
@@ -107,10 +109,8 @@
     </section>
 
     <!-- FACEBOOK ПЕЙЖ СЕКЦ -->
-       <!-- ГАЛЕРЕЙ СЕКЦ -->
-        <!-- ГАЛЕРЕЙ СЕКЦ -->
-        <!-- ГАЛЕРЕЙ СЕКЦ -->
-    <section class="gallery-section" style="width: 100%; max-width: 1200px; margin: 60px auto; text-align: center; padding: 0 20px;">
+    <!-- ГАЛЕРЕЙ СЕКЦ -->
+    <section class="gallery-section" style="width: 100%; max-width: 1400px; margin: 60px auto; text-align: center; padding: 0 20px;">
         <h2 style="font-size: 1.6rem; color: #1e3a8a; margin-bottom: 10px; font-weight:600;">Бидний хийсэн ажлууд</h2>
         <p style="color: #777; margin-bottom: 40px;">Хийсэн ажлын зураг, видео мэдээллийг эндээс үзээрэй</p>
         
@@ -159,6 +159,143 @@
             </a>
         </div>
     </section>
+
+    <!-- Lightbox (Дэлгэц дүүрэн томрох) -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- ГАЛЕРЕЙН CSS СТИЛЬ -->
+    <style>
+        /* Галерейн тор (Grid) тохиргоо - 6 багана */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* Том дэлгэцэнд 6 багана */
+            gap: 10px; /* Зургуудын хоорондын зай багассан */
+        }
+
+        /* Зургийн хайрцаг */
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Зургийн үндсэн хэмжээ - илүү жижиг */
+        .gallery-item img {
+            width: 100%;
+            height: 100px; /* Зургийн өндөр (маш жижиг) */
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        /* Хулгана очиход бага зэрэг томрох */
+        .gallery-item:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* ===== LIGHTBOX (Дэлгэц дүүрэн томрох) ===== */
+        .lightbox {
+            display: none; /* Анхдагчаар нуугдсан */
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Хар дэвсгэр */
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex; /* Идэвхтэй үед харагдана */
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            animation: zoomIn 0.3s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            color: #ff523b;
+        }
+
+        /* Анимейшн */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* ===== Гар утсанд тохируулах (Responsive) ===== */
+        @media (max-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .gallery-item img {
+                height: 90px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .gallery-item img {
+                height: 120px;
+            }
+            .lightbox-close {
+                font-size: 40px;
+                top: 10px;
+                right: 20px;
+            }
+        }
+    </style>
 
     <!-- ГАЛЕРЕЙН CSS СТИЛЬ -->
     <style>
@@ -266,6 +403,38 @@
                 resultBox.classList.add('hidden');
             }
         }
+
+                // ===== Lightbox (Зураг томруулах) функц =====
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+
+        // Бүх зурган дээр click event нэмэх
+        galleryItems.forEach(img => {
+            img.addEventListener('click', function() {
+                lightbox.classList.add('active');
+                lightboxImg.src = this.src;
+            });
+        });
+
+        // Lightbox-ийг хаах (X товч)
+        document.querySelector('.lightbox-close').addEventListener('click', function() {
+            lightbox.classList.remove('active');
+        });
+
+        // Lightbox-ийг хаах (гадна талд дарах)
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // ESC товчоор хаах
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                lightbox.classList.remove('active');
+            }
+        });
 
         // Facebook SDK-г ачаалсны дараа XFBML-ийг дахин задлан шинжлэх
         window.fbAsyncInit = function() {
