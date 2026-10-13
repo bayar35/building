@@ -35,21 +35,27 @@
         <h1>Обой наалт болон SPC шал угсралт</h1>
     </header>
 
-    <!-- ҮЙЛЧИЛГЭЭНИЙ КАРТУУД -->
+    <!-- ҮЙЛЧИЛГЭЭНИЙ КАРТУУД (GRID) -->
     <section class="course">
         <div class="row">
             <div class="product-card">
-                <div class="feature-icon" style="text-align: center;"><i class="fa-solid fa-paint-roller" style="color: #ff523b; font-size: 2.5rem;"></i></div>
+                <div class="feature-icon" style="text-align: center; margin-bottom: 15px;">
+                    <i class="fa-solid fa-paint-roller" style="color: #ff523b; font-size: 2.5rem;"></i>
+                </div>
                 <h3>Чанар сайтай обой</h3>
                 <p>Флизелин болон vinyl суурьтай угаадаг обойг төгс наана.</p>
             </div>
             <div class="product-card">
-                <div class="feature-icon" style="text-align: center;"><i class="fa-solid fa-border-all" style="color: #ff523b; font-size: 2.5rem;"></i></div>
+                <div class="feature-icon" style="text-align: center; margin-bottom: 15px;">
+                    <i class="fa-solid fa-border-all" style="color: #ff523b; font-size: 2.5rem;"></i>
+                </div>
                 <h3>SPC шал угсралт</h3>
                 <p>Цэвэрхэн, хурдан бөгөөд усны хамгаалалттай орчин үеийн шал.</p>
             </div>
             <div class="product-card">
-                <div class="feature-icon" style="text-align: center;"><i class="fa-solid fa-building-user" style="color: #ff523b; font-size: 2.5rem;"></i></div>
+                <div class="feature-icon" style="text-align: center; margin-bottom: 15px;">
+                    <i class="fa-solid fa-building-user" style="color: #ff523b; font-size: 2.5rem;"></i>
+                </div>
                 <h3>Баталгаат мастерууд</h3>
                 <p>Туршлагатай бригад цаг тухайд нь чанартай хүлээлгэж өгнө.</p>
             </div>
@@ -61,15 +67,22 @@
         <h2>Урьдчилсан Үнийн Тооцоолуур</h2>        
         <div class="form-group">
             <label>Обой орох рулон тоо:</label>
-            <input type="number" placeholder="Жишээ нь: 5">
+            <input type="number" id="wallpaper" placeholder="Жишээ нь: 5">
         </div>
         <div class="form-group">
             <label>SPC шал угсрах талбай (м.кв):</label>
-            <input type="number" placeholder="Жишээ нь: 30">
+            <input type="number" id="floor" placeholder="Жишээ нь: 30">
         </div>
-        <button class="btn-dark" style="margin-bottom: 20px;">Үнийг тооцох</button>
+        <button type="button" class="btn-dark" onclick="calculatePrice()" style="margin-bottom: 20px;">Үнийг тооцох</button>
 
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+        <!-- Үр дүн харуулах хайрцаг -->
+        <div id="resultBox" class="result-box hidden">
+            <div class="result-title" style="color: #475569; font-size: 0.9rem;">Урьдчилсан ажлын хөлс:</div>
+            <div id="totalPrice" class="result-price">0 ₮</div>
+            <div class="result-note" style="font-size: 0.75rem; color: #94a3b8; margin-top: 5px;">* Энэхүү үнэд материалын зардал ороогүй болно.</div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
 
         <h2>Захиалга өгөх</h2>
         <div class="form-group">
@@ -84,33 +97,29 @@
             <label>Хаяг (Байр / Хороолол):</label>
             <input type="text" placeholder="Хаяг оруулна уу">
         </div>
-        <button class="btn-submit">Захиалга илгээх</button>
+        <button type="button" class="btn-submit">Захиалга илгээх</button>
     </section>
 
     <!-- FACEBOOK ПЕЙЖ СЕКЦ -->
-    <section class="facebook-section" style="width: 100%; max-width: 1200px; margin: 50px auto; text-align: center; padding: 0 20px;">
+    <section class="facebook-section" style="width: 100%; max-width: 1200px; margin: 60px auto; text-align: center; padding: 0 20px;">
         <h2 style="font-size: 1.6rem; color: #1e3a8a; margin-bottom: 10px; font-weight:600;">Манай Facebook Хуудас</h2>
-        <p style="color: #777; margin-bottom: 20px;">Шинэ бүтээгдэхүүн, зураг, видео мэдээллийг цаг тухайд нь аваарай</p>
-        <div style="display: flex; justify-content: center; background: #fff; padding: 15px; border-radius: 12px; max-width: 420px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee;">
-            <div class="fb-page" 
-              data-href="https://facebook.com" 
-              data-tabs="timeline" 
-              data-width="380" 
-              data-height="500" 
-              data-small-header="false" 
-              data-adapt-container-width="true" 
-              data-hide-cover="false" 
-              data-show-facepile="true">
-            </div>
+        <p style="color: #777; margin-bottom: 25px;">Хийсэн ажлын зураг, видео мэдээллийг цаг тухайд нь манай фэйсбүүк хуудаснаас аваарай</p>
+        
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 100px;">
+            <a href="https://facebook.com" 
+               target="_blank" 
+               style="display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1877f2 0%, #0a56bd 100%); color: white; font-weight: 600; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3); transition: all 0.3s ease;">
+                <i class="fa-brands fa-facebook" style="margin-right: 12px; font-size: 1.5rem;"></i> "Барилгачин Гэр Бүл" Пэйж рүү зочлох
+            </a>
         </div>
     </section>
 
-    <!-- ХӨЛ ХЕСЕГ -->
+    <!-- ХӨЛ ХЭСЭГ (FOOTER) -->
     <section class="footer">
         <h4>Бидний тухай</h4>
         <p>Паркетан шал • Тавилгын хавтан • Интерьерийн бүрэн шийдэл • Захиалга, Зөвлөгөө</p>
         <div class="icons">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
             <a href="#"><i class="fa-brands fa-linkedin"></i></a>
             <a href="#"><i class="fa-brands fa-youtube"></i></a>
@@ -118,15 +127,34 @@
         <p>Made with <i class="fa-solid fa-heart" style="color: #ff523b;"></i> by Superior Construction XXK, Ulaanbaatar, Mongolia, 2026</p>
     </section>
 
-    <!-- Facebook JavaScript SDK -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://facebook.net"></script>
-
-    <!-- Цэс удирдах Script -->
+    <!-- JAVASCRIPT УДИРДЛАГА -->
     <script>
+        // Навигацийн цэс удирдах функц
         var navLinks = document.getElementById("navLinks");
         function showMenu(){ navLinks.style.right = "0"; }
         function hideMenu(){ navLinks.style.right = "-200px"; }
+
+        // Үнэ тооцоолох функц (Жишээ ажлын хөлс: Обой рулон=15,000₮, Шал м.кв=8,000₮)
+        function calculatePrice() {
+            const wallpaperRolls = parseFloat(document.getElementById('wallpaper').value) || 0;
+            const floorSq = parseFloat(document.getElementById('floor').value) || 0;
+            
+            const WALLPAPER_UNIT_PRICE = 15000; 
+            const FLOOR_UNIT_PRICE = 8000;
+            
+            const total = (wallpaperRolls * WALLPAPER_UNIT_PRICE) + (floorSq * FLOOR_UNIT_PRICE);
+            
+            const resultBox = document.getElementById('resultBox');
+            const totalPrice = document.getElementById('totalPrice');
+            
+            if (total > 0) {
+                totalPrice.innerText = total.toLocaleString() + ' ₮';
+                resultBox.classList.remove('hidden');
+            } else {
+                alert('Та утгуудаа зөв оруулна уу!');
+                resultBox.classList.add('hidden');
+            }
+        }
     </script>
 </body>
 </html>
