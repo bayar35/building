@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Обой & SPC Шал Угсралтын Үйлчилгээ</title>
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts зөв линк -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- FontAwesome зөв линк -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-        <div id="fb-root"></div>
+    <!-- Facebook SDK зөв эхлүүлэлт -->
+    <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"></script>
-
 
     <!-- НАВИГАЦИ БА ТОЛГОЙ -->
     <header class="sub-header">    
@@ -105,7 +107,6 @@
     </section>
 
     <!-- FACEBOOK ПЕЙЖ СЕКЦ -->
-    <    <!-- FACEBOOK ПЕЙЖ СЕКЦ -->
     <section class="facebook-section" style="width: 100%; max-width: 1200px; margin: 60px auto; text-align: center; padding: 0 20px;">
         <h2 style="font-size: 1.6rem; color: #1e3a8a; margin-bottom: 10px; font-weight:600;">Манай Facebook Хуудас</h2>
         <p style="color: #777; margin-bottom: 25px;">Хийсэн ажлын зураг, видео мэдээллийг цаг тухайд нь манай фэйсбүүк хуудаснаас аваарай</p>
@@ -118,7 +119,7 @@
             </a>
         </div>
 
-        <!-- Facebook Plugin-ийг энд зөв оруулав -->
+        <!-- Facebook Plugin -->
         <div class="fb-page" 
              data-href="https://www.facebook.com/Jargalan123/" 
              data-tabs="timeline" 
@@ -132,9 +133,6 @@
                 <a href="https://www.facebook.com/Jargalan123/">e-comm</a>
             </blockquote>
         </div>
-    </section>
-</div>
-
     </section>
 
     <!-- ХӨЛ ХЭСЭГ (FOOTER) -->
@@ -178,6 +176,14 @@
                 resultBox.classList.add('hidden');
             }
         }
+
+        // Facebook SDK-г ачаалсны дараа XFBML-ийг дахин задлан шинжлэх
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v19.0'
+            });
+        };
     </script>
 </body>
 </html>
