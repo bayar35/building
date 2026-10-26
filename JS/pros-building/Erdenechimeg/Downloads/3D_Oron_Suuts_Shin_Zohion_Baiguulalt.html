@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактив 3D Орон Суц - Автомат Аялал</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        .title {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            pointer-events: none;
+            z-index: 10;
+        }
+        #viewcube-container {
+            position: absolute;
+            top: 70px;
+            right: 70px;
+            width: 170px;
+            height: 170px;
+            z-index: 20;
+            pointer-events: none;
+        }
+        #tour-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            z-index: 100;
+            transition: 0.2s;
+        }
+        #tour-btn:hover { background: linear-gradient(135deg, #c0392b, #a93226); transform: translateX(-50%) scale(1.05); }
+        
+        .popup-menu {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(20, 20, 20, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            z-index: 100;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .popup-menu h3 { margin-top: 0; margin-bottom: 15px; color: #f1c40f; }
+        .menu-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .menu-btn:hover { background-color: #2980b9; }
+        .close-btn { background-color: #e74c3c; margin-top: 15px; }
+        .close-btn:hover { background-color: #c0392b; }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            margin-top: 10px;
+            padding: 5px;
+        }
+        .color-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .color-box:hover { transform: scale(1.1); border-color: #fff; }
+        .item-card {
+            background: #333;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            border: 1px solid #444;
+        }
+        .item-card:hover { border-color: #f1c40f; }
+    </style>
+</head>
+<body>
+
+    <div class="title">Нэг дарж цэс гаргах | Хоёр удаа дарж ханыг алга болгох</div>
+    <div id="viewcube-container"></div>
+    <button id="tour-btn" onclick="startTour()">🎥 Автомат аялал эхлүүлэх (10 сек)</button>
+
+    <!-- Цэсүүд -->
+    <div id="wall-menu" class="popup-menu">
+        <h3 id="wall-menu-title">Хананд сонгох хэлбэр</h3>
+        <button class="menu-btn" onclick="openWallColors()">Будаг сонгох (100 өнгө)</button>
+        <button class="menu-btn" onclick="openWallWallpapers()">Обой сонгох (20 төрөл)</button>
+        <br><button class="menu-btn close-btn" onclick="closeMenus()">Хаах</button>
+    </div>
+
+    <div id="color-picker-menu" class="popup-menu">
+        <h3>Өнгө сонгох</h3>
+        <div class="options-grid" id="color-grid"></div>
+        <button class="menu-btn close-btn" onclick="closeMenus()">Буцах</button>
+    </div>
+
+    <div id="wallpaper-menu" class="popup-menu">
+        <h3>Обой сонгох</h3>
+        <div class="options-grid" id="wallpaper-grid" style="grid-template-columns: repeat(2, 1fr);"></div>
+        <button class="menu-btn close-btn" onclick="closeMenus()">Буцах</button>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        let camera, scene, renderer, controls;
+        let cubeCam, cubeScene, cubeRenderer, directionMan;
+        let walls = [];
+        let selectedWall = null;
+        let raycaster, mouse;
+        let frontDoor, livingRoomDoor, masterDoor;
+        let isTouring = false;
+        const textureLoader = new THREE.TextureLoader();
+
+        init();
+        animate();
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a1a);
+
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 8, 12);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.body.appendChild(renderer.domElement);
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.maxPolarAngle = Math.PI / 2 - 0.05;
+
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+            dirLight.position.set(5, 10, 7);
+            scene.add(dirLight);
+
+            createDetailedApartment();
+            createManhattanCityscape();
+            setupViewCube();
+
+            window.addEventListener('pointerdown', onPointerDown);
+            window.addEventListener('dblclick', onDoubleClick);
+            window.addEventListener('resize', onWindowResize);
+
+            generateColorPickers('color-grid', (hex) => {
+                if (selectedWall) {
+                    selectedWall.material.color.set(hex);
+                    selectedWall.material.map = null;
+                    selectedWall.material.needsUpdate = true;
+                }
+                closeMenus();
+            });
+
+            generateWallpapers();
+        }
+
+        function createDetailedApartment() {
+            // =========================================================
+            // ШИНЭ ӨРӨӨНИЙ ЗОХИОН БАЙГУУЛАЛТ
+            // Зураг дээрх 2D төлөвлөгөөг 3D хэлбэрт ойролцоогоор буулгав.
+            //
+            // Дээд эгнээ:
+            // Master Bedroom | Service / Bath | Master Bath | Kids Room
+            //
+            // Дунд:
+            // Dining Room    | Hallway
+            //
+            // Доод:
+            // Kitchen        | жижиг ариун цэврийн/үүдний хэсэг | Hallway
+            // =========================================================
+
+            const wallH = 2.8;
+            const wallT = 0.12;
+
+            const wallMat = () => new THREE.MeshStandardMaterial({
+                color: 0xf2f0eb,
+                roughness: 0.82,
+                transparent: true,
+                opacity: 1.0,
+                side: THREE.DoubleSide
+            });
+
+            const interiorWallMat = () => new THREE.MeshStandardMaterial({
+                color: 0xe7e2da,
+                roughness: 0.85,
+                transparent: true,
+                opacity: 1.0,
+                side: THREE.DoubleSide
+            });
+
+            const doorMat = new THREE.MeshStandardMaterial({
+                color: 0x7b4a2e,
+                roughness: 0.55
+            });
+
+            const windowMat = new THREE.MeshStandardMaterial({
+                color: 0x87ceeb,
+                transparent: true,
+                opacity: 0.32,
+                roughness: 0.1,
+                metalness: 0.05
+            });
+
+            // Room floor materials
+            const floorMats = {
+                master: new THREE.MeshStandardMaterial({ color: 0xc9a878, roughness: 0.72 }),
+                dining: new THREE.MeshStandardMaterial({ color: 0xd2b48c, roughness: 0.75 }),
+                kitchen: new THREE.MeshStandardMaterial({ color: 0xcbbca9, roughness: 0.78 }),
+                hallway: new THREE.MeshStandardMaterial({ color: 0xbfae98, roughness: 0.78 }),
+                bath: new THREE.MeshStandardMaterial({ color: 0xd8d8d8, roughness: 0.65 }),
+                kids: new THREE.MeshStandardMaterial({ color: 0xccb78f, roughness: 0.72 }),
+                service: new THREE.MeshStandardMaterial({ color: 0xcfcfcf, roughness: 0.68 })
+            };
+
+            function addWall(width, height, x, y, z, rotationY = 0, name = 'Хана') {
+                const wall = new THREE.Mesh(
+                    new THREE.PlaneGeometry(width, height),
+                    wallMat()
+                );
+
+                wall.position.set(x, y, z);
+                wall.rotation.y = rotationY;
+
+                wall.userData = {
+                    type: 'wall',
+                    name: name,
+                    isHidden: false
+                };
+
+                scene.add(wall);
+                walls.push(wall);
+
+                return wall;
+            }
+
+            function addSolidWall(width, height, x, y, z, rotationY = 0, name = 'Хана') {
+                const wall = new THREE.Mesh(
+                    new THREE.BoxGeometry(width, height, wallT),
+                    interiorWallMat()
+                );
+
+                wall.position.set(x, y, z);
+                wall.rotation.y = rotationY;
+
+                wall.userData = {
+                    type: 'wall',
+                    name: name,
+                    isHidden: false
+                };
+
+                scene.add(wall);
+                walls.push(wall);
+
+                return wall;
+            }
+
+            function addDoor(x, y, z, rotationY = 0, name = 'Хаалга') {
+                const door = new THREE.Mesh(
+                    new THREE.BoxGeometry(0.9, 2.1, 0.08),
+                    doorMat
+                );
+
+                door.position.set(x, y, z);
+                door.rotation.y = rotationY;
+                door.userData = { type: 'door', name };
+
+                scene.add(door);
+                return door;
+            }
+
+            function addWindow(x, y, z, width = 1.4, height = 1.3, rotationY = 0) {
+                const win = new THREE.Mesh(
+                    new THREE.BoxGeometry(width, height, 0.05),
+                    windowMat
+                );
+
+                win.position.set(x, y, z);
+                win.rotation.y = rotationY;
+
+                scene.add(win);
+                return win;
+            }
+
+            function createFloor(w, l, x, z, material, roomName) {
+                const floor = new THREE.Mesh(
+                    new THREE.PlaneGeometry(w, l),
+                    material
+                );
+
+                floor.rotation.x = -Math.PI / 2;
+                floor.position.set(x, 0, z);
+
+                floor.userData = {
+                    type: 'floor',
+                    room: roomName
+                };
+
+                scene.add(floor);
+                return floor;
+            }
+
+            function addRoomLabel(text, x, z, color = '#222222') {
+                const canvas = document.createElement('canvas');
+                canvas.width = 512;
+                canvas.height = 128;
+
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, 512, 128);
+
+                ctx.fillStyle = 'rgba(255,255,255,0.72)';
+                ctx.roundRect(20, 18, 472, 92, 18);
+                ctx.fill();
+
+                ctx.fillStyle = color;
+                ctx.font = 'bold 38px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 256, 64);
+
+                const tex = new THREE.CanvasTexture(canvas);
+                tex.needsUpdate = true;
+
+                const sprite = new THREE.Sprite(
+                    new THREE.SpriteMaterial({
+                        map: tex,
+                        transparent: true,
+                        depthTest: false
+                    })
+                );
+
+                sprite.position.set(x, 0.04, z);
+                sprite.scale.set(3.5, 0.88, 1);
+
+                scene.add(sprite);
+                return sprite;
+            }
+
+            // =========================================================
+            // ХЭМЖЭЭНИЙ СИСТЕМ
+            // =========================================================
+            // 1 Three.js unit ≈ 1 meter.
+            //
+            // Зурагт харагдах харьцааг барихын тулд:
+            // Master Bedroom ~ 5.816 x 4.314
+            // Kids Room      ~ 5.293 x 4.434
+            // Dining Room    ~ 7.63  x 8.057
+            // Kitchen        ~ 5.816 x 4.088
+            // Hallway        ~ 3.66  x 12.505
+            // =========================================================
+
+            const x0 = -7.65;
+            const xDiningRight = 0.00;
+            const xHallLeft = 0.00;
+            const xHallRight = 3.66;
+            const xTopRight = 9.00;
+
+            const zTop = -6.25;
+            const zTopBottom = -1.94;
+            const zDiningTop = -1.94;
+            const zDiningBottom = 6.12;
+            const zKitchenBottom = 10.21;
+
+            // =========================================================
+            // ШАЛ
+            // =========================================================
+
+            createFloor(
+                5.816, 4.314,
+                x0 + 2.908, zTop + 2.157,
+                floorMats.master,
+                'Master Bedroom'
+            );
+
+            createFloor(
+                2.08, 2.10,
+                -1.00, -4.55,
+                floorMats.service,
+                'Service'
+            );
+
+            createFloor(
+                3.16, 2.10,
+                1.62, -4.55,
+                floorMats.bath,
+                'Master Bath'
+            );
+
+            createFloor(
+                5.293, 4.434,
+                6.35, zTop + 2.217,
+                floorMats.kids,
+                'Kids Room'
+            );
+
+            createFloor(
+                7.63, 8.057,
+                x0 + 3.815, 2.09,
+                floorMats.dining,
+                'Dining Room'
+            );
+
+            createFloor(
+                5.816, 4.088,
+                x0 + 2.908, 8.17,
+                floorMats.kitchen,
+                'Kitchen'
+            );
+
+            createFloor(
+                3.66, 12.50,
+                1.83, 2.10,
+                floorMats.hallway,
+                'Hallway'
+            );
+
+            // Small bottom-center spaces
+            createFloor(
+                1.25, 1.30,
+                0.55, 8.45,
+                floorMats.bath,
+                'WC'
+            );
+
+            createFloor(
+                1.25, 1.30,
+                2.00, 8.45,
+                floorMats.service,
+                'Utility'
+            );
+
+            // =========================================================
+            // ГАДНА ХАНА
+            // =========================================================
+
+            // Top-left / Master
+            addWall(5.816, wallH, x0 + 2.908, wallH / 2, zTop, 0, 'Master Bedroom - дээд хана');
+            addWall(4.314, wallH, x0, wallH / 2, zTop + 2.157, Math.PI / 2, 'Master Bedroom - зүүн хана');
+
+            // Top-center service/bath area
+            addWall(5.16, wallH, 0.42, wallH / 2, zTop, 0, 'Дээд хэсгийн хана');
+
+            // Kids right outside walls
+            addWall(5.293, wallH, 6.35, wallH / 2, zTop, 0, 'Kids Room - дээд хана');
+            addWall(4.434, wallH, 9.00, wallH / 2, zTop + 2.217, Math.PI / 2, 'Kids Room - баруун хана');
+
+            // Right side lower wall
+            addWall(12.50, wallH, 3.66, wallH / 2, 6.25, Math.PI / 2, 'Hallway - баруун гадна хана');
+
+            // Bottom Kitchen outside
+            addWall(5.816, wallH, x0 + 2.908, wallH / 2, zKitchenBottom, 0, 'Kitchen - доод хана');
+            addWall(4.088, wallH, x0, wallH / 2, 8.17, Math.PI / 2, 'Kitchen - зүүн хана');
+
+            // Dining left side
+            addWall(12.37, wallH, x0, wallH / 2, 2.09, Math.PI / 2, 'Dining/Kitchen - зүүн гадна хана');
+
+            // =========================================================
+            // ДОТООД ХАНА
+            // =========================================================
+
+            // Master Bedroom / upper center divider
+            addSolidWall(
+                4.314, wallH,
+                -1.84, wallH / 2, -1.94,
+                0,
+                'Master Bedroom - дотор хана'
+            );
+
+            // Master / Service vertical divider
+            addSolidWall(
+                4.314, wallH,
+                -1.84, wallH / 2, -4.10,
+                Math.PI / 2,
+                'Master / Service хуваалт'
+            );
+
+            // Service / Master Bath divider
+            addSolidWall(
+                2.10, wallH,
+                0.00, wallH / 2, -4.55,
+                Math.PI / 2,
+                'Service / Master Bath'
+            );
+
+            // Bath area / Kids divider
+            addSolidWall(
+                4.434, wallH,
+                3.70, wallH / 2, -4.03,
+                Math.PI / 2,
+                'Bath / Kids хуваалт'
+            );
+
+            // Kids / Hallway divider
+            addSolidWall(
+                4.434, wallH,
+                3.70, wallH / 2, -1.82,
+                Math.PI / 2,
+                'Kids / Hallway хуваалт'
+            );
+
+            // Dining / Hallway long divider
+            addSolidWall(
+                8.057, wallH,
+                0.00, wallH / 2, 2.09,
+                Math.PI / 2,
+                'Dining / Hallway хуваалт'
+            );
+
+            // Kitchen / Hallway divider
+            addSolidWall(
+                4.088, wallH,
+                0.00, wallH / 2, 8.17,
+                Math.PI / 2,
+                'Kitchen / Hallway хуваалт'
+            );
+
+            // Small WC/utility partitions
+            addSolidWall(
+                2.55, wallH,
+                0.55, wallH / 2, 7.75,
+                0,
+                'WC / Utility дээд хана'
+            );
+
+            addSolidWall(
+                1.30, wallH,
+                -0.10, wallH / 2, 8.45,
+                Math.PI / 2,
+                'WC хана'
+            );
+
+            addSolidWall(
+                1.30, wallH,
+                1.20, wallH / 2, 8.45,
+                Math.PI / 2,
+                'Utility хана'
+            );
+
+            // =========================================================
+            // ХААЛГАНУУД
+            // =========================================================
+
+            frontDoor = addDoor(
+                1.83, 1.05, 6.25,
+                Math.PI / 2,
+                'Үндсэн орц'
+            );
+
+            // Dining -> Hallway
+            livingRoomDoor = addDoor(
+                0.05, 1.05, 0.40,
+                Math.PI / 2,
+                'Dining Hallway'
+            );
+
+            // Hallway -> Master
+            masterDoor = addDoor(
+                -1.84, 1.05, -1.92,
+                0,
+                'Master Bedroom'
+            );
+
+            // Hallway -> Kids
+            addDoor(
+                3.66, 1.05, -0.55,
+                Math.PI / 2,
+                'Kids Room'
+            );
+
+            // Hallway -> Kitchen
+            addDoor(
+                0.20, 1.05, 6.95,
+                Math.PI / 2,
+                'Kitchen'
+            );
+
+            // Service
+            addDoor(
+                -0.55, 1.05, -3.20,
+                0,
+                'Service'
+            );
+
+            // Master Bath
+            addDoor(
+                1.62, 1.05, -3.20,
+                0,
+                'Master Bath'
+            );
+
+            // WC
+            addDoor(
+                0.55, 1.05, 7.78,
+                0,
+                'WC'
+            );
+
+            // =========================================================
+            // ЦОНХ
+            // =========================================================
+
+            addWindow(
+                -7.65, 1.55, -4.25,
+                1.6, 1.3,
+                Math.PI / 2
+            );
+
+            addWindow(
+                6.30, 1.55, -6.25,
+                1.8, 1.3,
+                0
+            );
+
+            addWindow(
+                9.00, 1.55, -4.15,
+                1.7, 1.3,
+                Math.PI / 2
+            );
+
+            addWindow(
+                -4.20, 1.55, 10.21,
+                1.8, 1.3,
+                0
+            );
+
+            addWindow(
+                -7.65, 1.55, 3.10,
+                1.8, 1.3,
+                Math.PI / 2
+            );
+
+            // =========================================================
+            // 3D ӨРӨӨНИЙ НЭР
+            // =========================================================
+
+            addRoomLabel('MASTER BEDROOM', -4.75, -4.05);
+            addRoomLabel('SERVICE', -0.95, -4.65);
+            addRoomLabel('MASTER BATH', 1.55, -4.65);
+            addRoomLabel('KIDS ROOM', 6.35, -4.00);
+            addRoomLabel('DINING ROOM', -3.85, 2.10);
+            addRoomLabel('HALLWAY', 1.85, 2.30);
+            addRoomLabel('KITCHEN', -4.65, 8.25);
+            addRoomLabel('WC', 0.55, 8.45);
+            addRoomLabel('UTILITY', 2.00, 8.45);
+
+            // =========================================================
+            // ШАЛНЫ СУУРЬ / ГАЗАР
+            // =========================================================
+
+            const base = new THREE.Mesh(
+                new THREE.BoxGeometry(18.0, 0.08, 17.0),
+                new THREE.MeshStandardMaterial({
+                    color: 0x8b8b8b,
+                    roughness: 0.95
+                })
+            );
+
+            base.position.set(0.65, -0.09, 2.0);
+            scene.add(base);
+        }
+
+        function createManhattanCityscape() {
+            // Манхаттен барилгууд болон Central Park-ийн ерөнхий дүрслэл
+            const cityGroup = new THREE.Group();
+            
+            // Empire State & Chrysler загварчилсан энгийн өндөр барилгууд
+            const buildingMat = new THREE.MeshStandardMaterial({ color: 0x4a6572, roughness: 0.5 });
+            
+            const b1 = new THREE.Mesh(new THREE.BoxGeometry(4, 15, 4), buildingMat);
+            b1.position.set(-15, 5, -20);
+            cityGroup.add(b1);
+
+            const b2 = new THREE.Mesh(new THREE.BoxGeometry(3, 18, 3), buildingMat);
+            b2.position.set(-22, 7, -15);
+            cityGroup.add(b2);
+
+            // Central Park (Ногоон өнгийн талбай)
+            const parkMat = new THREE.MeshStandardMaterial({ color: 0x2e7d32, roughness: 0.8 });
+            const park = new THREE.Mesh(new THREE.PlaneGeometry(15, 15), parkMat);
+            park.rotation.x = -Math.PI / 2;
+            park.position.set(15, -0.1, -20);
+            cityGroup.add(park);
+
+            scene.add(cityGroup);
+        }
+
+        window.startTour = function() {
+            if (isTouring) return;
+
+            isTouring = true;
+            controls.enabled = false;
+
+            const startTime = performance.now();
+            const duration = 12000;
+
+            function animateTour(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1.0);
+
+                if (progress < 0.20) {
+                    const p = progress / 0.20;
+                    camera.position.set(
+                        1.83,
+                        1.65,
+                        8.8 - p * 2.6
+                    );
+                    camera.lookAt(0, 1.35, 2.5);
+
+                    if (p > 0.55) {
+                        frontDoor.rotation.y = Math.PI / 2;
+                    }
+
+                } else if (progress < 0.42) {
+                    const p = (progress - 0.20) / 0.22;
+
+                    camera.position.set(
+                        1.83,
+                        1.65,
+                        6.2 - p * 4.5
+                    );
+                    camera.lookAt(
+                        -2.8,
+                        1.35,
+                        2.0
+                    );
+
+                } else if (progress < 0.64) {
+                    const p = (progress - 0.42) / 0.22;
+
+                    livingRoomDoor.rotation.y = Math.PI / 2;
+
+                    camera.position.set(
+                        1.5 - p * 4.0,
+                        1.65,
+                        1.7
+                    );
+
+                    camera.lookAt(
+                        -3.5,
+                        1.35,
+                        2.2
+                    );
+
+                } else if (progress < 0.82) {
+                    const p = (progress - 0.64) / 0.18;
+
+                    camera.position.set(
+                        -2.4 + p * 3.8,
+                        1.65,
+                        0.2 - p * 4.0
+                    );
+
+                    camera.lookAt(
+                        -4.4,
+                        1.35,
+                        -4.0
+                    );
+
+                    masterDoor.rotation.y = Math.PI / 2;
+
+                } else {
+                    const p = (progress - 0.82) / 0.18;
+
+                    camera.position.set(
+                        1.4 + p * 4.2,
+                        1.65,
+                        -2.6
+                    );
+
+                    camera.lookAt(
+                        6.2,
+                        1.35,
+                        -4.0
+                    );
+                }
+
+                if (progress < 1.0) {
+                    requestAnimationFrame(animateTour);
+                } else {
+                    isTouring = false;
+                    controls.enabled = true;
+                }
+            }
+
+            requestAnimationFrame(animateTour);
+        }
+
+        function setupViewCube() {
+            const container = document.getElementById('viewcube-container');
+
+            cubeScene = new THREE.Scene();
+
+            cubeCam = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+            cubeCam.position.set(0, 1.25, 5);
+
+            cubeRenderer = new THREE.WebGLRenderer({
+                antialias: true,
+                alpha: true
+            });
+
+            cubeRenderer.setSize(160, 160);
+            cubeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.innerHTML = '';
+            container.appendChild(cubeRenderer.domElement);
+
+            directionMan = new THREE.Group();
+
+            const skinMat = new THREE.MeshStandardMaterial({
+                color: 0xd69b72,
+                roughness: 0.7
+            });
+
+            const shirtMat = new THREE.MeshStandardMaterial({
+                color: 0x26384a,
+                roughness: 0.65
+            });
+
+            const pantsMat = new THREE.MeshStandardMaterial({
+                color: 0x17202a,
+                roughness: 0.7
+            });
+
+            const shoeMat = new THREE.MeshStandardMaterial({
+                color: 0x101010,
+                roughness: 0.5
+            });
+
+            // Head
+            const head = new THREE.Mesh(
+                new THREE.SphereGeometry(0.22, 24, 24),
+                skinMat
+            );
+            head.position.set(0, 1.58, 0);
+            directionMan.add(head);
+
+            // Neck
+            const neck = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.10, 0.10, 0.15, 16),
+                skinMat
+            );
+            neck.position.set(0, 1.37, 0);
+            directionMan.add(neck);
+
+            // Body
+            const body = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.25, 0.30, 0.65, 24),
+                shirtMat
+            );
+            body.position.set(0, 1.06, 0);
+            directionMan.add(body);
+
+            // Arms stretched sideways
+            const leftArm = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.075, 0.075, 0.88, 16),
+                skinMat
+            );
+            leftArm.rotation.z = Math.PI / 2;
+            leftArm.position.set(-0.53, 1.18, 0);
+            directionMan.add(leftArm);
+
+            const rightArm = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.075, 0.075, 0.88, 16),
+                skinMat
+            );
+            rightArm.rotation.z = Math.PI / 2;
+            rightArm.position.set(0.53, 1.18, 0);
+            directionMan.add(rightArm);
+
+            // Hands
+            const handL = new THREE.Mesh(
+                new THREE.SphereGeometry(0.095, 16, 16),
+                skinMat
+            );
+            handL.position.set(-0.98, 1.18, 0);
+            directionMan.add(handL);
+
+            const handR = new THREE.Mesh(
+                new THREE.SphereGeometry(0.095, 16, 16),
+                skinMat
+            );
+            handR.position.set(0.98, 1.18, 0);
+            directionMan.add(handR);
+
+            // Legs
+            const leftLeg = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.09, 0.09, 0.9, 16),
+                pantsMat
+            );
+            leftLeg.position.set(-0.14, 0.35, 0);
+            directionMan.add(leftLeg);
+
+            const rightLeg = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.09, 0.09, 0.9, 16),
+                pantsMat
+            );
+            rightLeg.position.set(0.14, 0.35, 0);
+            directionMan.add(rightLeg);
+
+            // Shoes
+            const leftShoe = new THREE.Mesh(
+                new THREE.BoxGeometry(0.18, 0.10, 0.35),
+                shoeMat
+            );
+            leftShoe.position.set(-0.14, -0.12, 0.08);
+            directionMan.add(leftShoe);
+
+            const rightShoe = new THREE.Mesh(
+                new THREE.BoxGeometry(0.18, 0.10, 0.35),
+                shoeMat
+            );
+            rightShoe.position.set(0.14, -0.12, 0.08);
+            directionMan.add(rightShoe);
+
+            directionMan.scale.set(0.68, 0.68, 0.68);
+            directionMan.position.y = -0.62;
+
+            cubeScene.add(directionMan);
+
+            // Compass ring
+            const ring = new THREE.Mesh(
+                new THREE.RingGeometry(1.05, 1.12, 64),
+                new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: 0.35,
+                    side: THREE.DoubleSide
+                })
+            );
+            ring.rotation.x = -Math.PI / 2;
+            ring.position.y = -0.72;
+            cubeScene.add(ring);
+
+            // Direction labels
+            function makeLabel(text, color) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 256;
+                canvas.height = 80;
+
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, 256, 80);
+                ctx.font = 'bold 42px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = color;
+                ctx.strokeStyle = 'rgba(0,0,0,0.8)';
+                ctx.lineWidth = 8;
+                ctx.strokeText(text, 128, 40);
+                ctx.fillText(text, 128, 40);
+
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.SpriteMaterial({
+                    map: texture,
+                    transparent: true,
+                    depthTest: false
+                });
+
+                const sprite = new THREE.Sprite(material);
+                sprite.scale.set(1.0, 0.31, 1);
+                return sprite;
+            }
+
+            const north = makeLabel('ХОЙД', '#4aa3ff');
+            north.position.set(0, 1.92, -0.02);
+            cubeScene.add(north);
+
+            const south = makeLabel('УРД', '#ff5252');
+            south.position.set(0, -0.30, 0);
+            cubeScene.add(south);
+
+            const east = makeLabel('ЗҮҮН', '#ffd54f');
+            east.position.set(-1.08, 0.82, 0);
+            cubeScene.add(east);
+
+            const west = makeLabel('БАРУУН', '#69f0ae');
+            west.position.set(1.08, 0.82, 0);
+            cubeScene.add(west);
+
+            // Small center direction arrow
+            const arrow = new THREE.Mesh(
+                new THREE.ConeGeometry(0.10, 0.32, 16),
+                new THREE.MeshBasicMaterial({ color: 0xff3d00 })
+            );
+            arrow.rotation.x = Math.PI / 2;
+            arrow.position.set(0, 0.82, -0.45);
+            cubeScene.add(arrow);
+
+            const ambient = new THREE.AmbientLight(0xffffff, 1.6);
+            cubeScene.add(ambient);
+
+            const light = new THREE.DirectionalLight(0xffffff, 2.2);
+            light.position.set(2, 4, 4);
+            cubeScene.add(light);
+        }
+
+        function onPointerDown(event) {
+            if (event.target.closest('.popup-menu') || event.target.closest('#viewcube-container') || event.target.id === 'tour-btn') return;
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(walls);
+            if (intersects.length > 0) {
+                const hitObject = intersects[0].object;
+                if (hitObject.userData.isHidden) return;
+                closeMenus();
+                if (hitObject.userData.type === 'wall') {
+                    selectedWall = hitObject;
+                    document.getElementById('wall-menu-title').innerText = `${hitObject.userData.name} сонголт`;
+                    document.getElementById('wall-menu').style.display = 'block';
+                }
+            }
+        }
+
+        function onDoubleClick(event) {
+            if (event.target.closest('.popup-menu') || event.target.closest('#viewcube-container') || event.target.id === 'tour-btn') return;
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(walls);
+            if (intersects.length > 0) {
+                const hitWall = intersects[0].object;
+                if (hitWall.userData.type === 'wall') {
+                    hitWall.userData.isHidden = !hitWall.userData.isHidden;
+                    hitWall.material.opacity = hitWall.userData.isHidden ? 0.0 : 1.0;
+                    hitWall.material.needsUpdate = true;
+                    closeMenus();
+                }
+            }
+        }
+
+        function generateColorPickers(containerId, callback) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            for (let i = 0; i < 100; i++) {
+                const hue = (i * 36) % 360;
+                const hex = `#${new THREE.Color(`hsl(${hue}, 70%, 40%)`).getHexString()}`;
+                const box = document.createElement('div');
+                box.className = 'color-box';
+                box.style.backgroundColor = hex;
+                box.onclick = () => callback(hex);
+                container.appendChild(box);
+            }
+        }
+
+        function generateWallpapers() {
+            const container = document.getElementById('wallpaper-grid');
+            container.innerHTML = '';
+            for (let i = 1; i <= 20; i++) {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerText = `Обой загвар #${i}`;
+                card.onclick = () => {
+                    textureLoader.load('https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=500&auto=format&fit=crop&q=60', (tex) => {
+                        tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2, 2);
+                        if (selectedWall) { selectedWall.material.map = tex; selectedWall.material.needsUpdate = true; }
+                    });
+                    closeMenus();
+                };
+                container.appendChild(card);
+            }
+        }
+
+        window.openWallColors = function() { document.getElementById('wall-menu').style.display = 'none'; document.getElementById('color-picker-menu').style.display = 'block'; }
+        window.openWallWallpapers = function() { document.getElementById('wall-menu').style.display = 'none'; document.getElementById('wallpaper-menu').style.display = 'block'; }
+        window.closeMenus = function() { document.querySelectorAll('.popup-menu').forEach(m => m.style.display = 'none'); }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (!isTouring) controls.update();
+            if (directionMan) {
+                directionMan.quaternion.copy(camera.quaternion).invert();
+            }
+            renderer.render(scene, camera);
+            cubeRenderer.render(cubeScene, cubeCam);
+        }
+    </script>
+</body>
+</html>

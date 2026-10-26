@@ -9,54 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Зургийн харьцуулалт утас болон компьютер дээр */
-        .comparison-images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        /* 4 үйлчилгээний хэсгийн сетка (Компьютер дээр зэрэгцэнэ, утсан дээр доошоо цуврна) */
-        .services-grid-box {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Компьютер дээр 2 баганаар зэрэгцэнэ */
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        /* Захиалгын формын хэсгийг хэт өргөн болгохгүй голд нь барих */
-        .comment-box {
-            max-width: 700px;
-            margin: 50px auto 0 auto !important;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
-        }
-
-        .comment-form input, 
-        .comment-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Гар утас болон жижиг дэлгэц дээрх тохиргоо */
-        @media (max-width: 768px) {
-            .comparison-images {
-                grid-template-columns: 1fr;
-            }
-            .services-grid-box {
-                grid-template-columns: 1fr; /* Утсан дээр дээрээс доошоо цуврна */
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -72,7 +24,6 @@
                     <li><a href="vöhringer.html">Vöhringer</a></li>
                     <li><a href="gonick.html">Гоник</a></li>
                     <li><a href="blog.html">Захиалагчийн булан</a></li>
-                    <li><a href="calculator.html">Тооцоолол</a></li>
                     <li><a href="zasvar.html">Засвар</a></li>
                     <li><a href="projects.html" class="active">Төслүүд</a></li>
                     <li><a href="contact.html">Холбоо</a></li>
@@ -81,40 +32,41 @@
             <i class="fa-solid fa-bars" onclick="showMenu()"></i>
         </nav>                
         <h1>Хэрэгжүүлсэн засвар, төслүүд</h1>
+        <p>Ухаалаг тооцоолуур болон найдвартай мастерууд</p>
     </header>
 
     <!-- Үндсэн контент хэсэг -->
     <section class="blog-content">
         
         <!-- Бидний хийдэг ажлын чиглэлүүд -->
-        <div class="project-intro" style="margin-bottom: 50px;">
+        <div class="project-intro">
             <h2>Бид дараах засвар, угсралтын ажлыг хийж байна</h2>
             <p>Бид орон сууц, албан тасалгаа болон үйлчилгээний талбайд интерьерийн цогц засвар үйлчилгээг чанарын өндөр түвшинд, албан ёсны баталгаатайгаар гүйцэтгэж байна.</p>
             
             <div class="services-grid-box">
-                <div class="service-card-item" style="background: #fff; padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; border-left: 5px solid #ff523b;">
-                    <h4 style="font-size: 18px; color: #222; margin-bottom: 8px;"><i class="fa-solid fa-hammer" style="color: #ff523b; margin-right: 10px;"></i> Дотор засал</h4>
-                    <p style="font-size: 14px; color: #666; margin: 0;">Обой хуулах, наах, хана тааз тэгшлэх, будах, эмульсдэх</p>
+                <div class="service-card-item">
+                    <h4><i class="fa-solid fa-hammer"></i> Дотор засал</h4>
+                    <p>Обой хуулах, наах, хана тааз тэгшлэх, будах, эмульсдэх</p>
                 </div>
                 
-                <div class="service-card-item" style="background: #fff; padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; border-left: 5px solid #ff523b;">
-                    <h4 style="font-size: 18px; color: #222; margin-bottom: 8px;"><i class="fa-solid fa-layer-group" style="color: #ff523b; margin-right: 10px;"></i> Шал болон хавтан</h4>
-                    <p style="font-size: 14px; color: #666; margin: 0;">Паркет, ламинат, SPC шал угсрах, плита наах</p>
+                <div class="service-card-item">
+                    <h4><i class="fa-solid fa-layer-group"></i> Шал болон хавтан</h4>
+                    <p>Паркет, ламинат, SPC шал угсрах, плита наах</p>
                 </div>
                 
-                <div class="service-card-item" style="background: #fff; padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; border-left: 5px solid #ff523b;">
-                    <h4 style="font-size: 18px; color: #222; margin-bottom: 8px;"><i class="fa-solid fa-couch" style="color: #ff523b; margin-right: 10px;"></i> Тавилга угсралт</h4>
-                    <p style="font-size: 14px; color: #666; margin: 0;">Гал тогооны тавилга, шкаф, тавиур, ширээ, шүүгээ шинэчлэх, угсрах</p>
+                <div class="service-card-item">
+                    <h4><i class="fa-solid fa-couch"></i> Тавилга угсралт</h4>
+                    <p>Гал тогооны тавилга, шкаф, тавиур, ширээ, шүүгээ шинэчлэх, угсрах</p>
                 </div>
                 
-                <div class="service-card-item" style="background: #fff; padding: 20px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; border-left: 5px solid #ff523b;">
-                    <h4 style="font-size: 18px; color: #222; margin-bottom: 8px;"><i class="fa-solid fa-sliders" style="color: #ff523b; margin-right: 10px;"></i> Инженерийн шугам сүлжээ</h4>
-                    <p style="font-size: 14px; color: #666; margin: 0;">Цахилгаан, сантехник, агааржуулалтын систем угсрах, шинэчлэх</p>
+                <div class="service-card-item">
+                    <h4><i class="fa-solid fa-sliders"></i> Инженерийн шугам сүлжээ</h4>
+                    <p>Цахилгаан, сантехник, агааржуулалтын систем угсрах, шинэчлэх</p>
                 </div>
             </div>
         </div>
 
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+        <hr class="section-divider">
 
         <!-- Төслийн харьцуулалт (Өмнө, Явц, Дараа) -->
         <div class="project-showcase">
@@ -122,57 +74,111 @@
             <p>Бидний хийсэн ажлыг эхлэхээс өмнө, явц дунд болон дууссан байдлаар нь харьцуулан харуулж байна.</p>
 
             <!-- Төслийн жишээ 1 -->
-            <div class="project-card-item" style="background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 25px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
-                <h3 style="margin-bottom: 15px; color: #222;">Төсөл #1: Орон сууцны иж бүрэн засвар, гал тогоо болон тавилга угсралт</h3>
+            <div class="project-card-item">
+                <h3>Төсөл #1: Орон сууцны иж бүрэн засвар, гал тогоо болон тавилга угсралт</h3>
                 
                 <div class="comparison-images">
-                    <div style="text-align: center;">
-                        <img src="images/before.jpg" alt="Эхлэхээс өмнө" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #e74c3c;">1. Эхлэхээс өмнө</span>
+                    <div class="img-container">
+                        <img src="images/before.jpg" alt="Эхлэхээс өмнө">
+                        <span class="lbl-red">1. Эхлэхээс өмнө</span>
                     </div>
-                    <div style="text-align: center;">
-                        <img src="images/during.jpg" alt="Гүйцэтгэх явц" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #f39c12;">2. Хийж буй явц</span>
+                    <div class="img-container">
+                        <img src="images/during.jpg" alt="Гүйцэтгэх явц">
+                        <span class="lbl-yellow">2. Хийж буй явц</span>
                     </div>
-                    <div style="text-align: center;">
-                        <img src="images/3d_house.png" alt="Дууссаны дараа" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #27ae60;">3. Хийсний дараа</span>
+                    <div class="img-container">
+                        <img src="images/3d_house.png" alt="Дууссаны дараа">
+                        <span class="lbl-green">3. Хийсний дараа</span>
                     </div>
                 </div>
-                <p style="color: #666; font-size: 14px; margin-top: 15px;"><strong>Хийсэн ажлууд:</strong> Хуучин обойг хуулж хана тэгшилсэн, SPC шал болон плита наасан, захиалгат гал тогооны тавилга болон коридорын шкаф угсарч, цахилгаан, сантехникийн шугам шинэчилсэн.</p>
+                <p class="project-desc"><strong>Хийсэн ажлууд:</strong> Хуучин обойг хуулж хана тэгшилсэн, SPC шал болон плита наасан, захиалгат гал тогооны тавилга болон коридорын шкаф угсарч, цахилгаан, сантехникийн шугам шинэчилсэн.</p>
             </div>
 
             <!-- Төслийн жишээ 2 -->
-            <div class="project-card-item" style="background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 25px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
-                <h3 style="margin-bottom: 15px; color: #222;">Төсөл #2: Ариун цэврийн өрөөний ус чийг тусгаарлалт ба плита наах</h3>
+            <div class="project-card-item">
+                <h3>Төсөл #2: Ариун цэврийн өрөөний ус чийг тусгаарлалт ба плита наах</h3>
                 
                 <div class="comparison-images">
-                    <div style="text-align: center;">
-                        <img src="images/bath1.jpg" alt="Эхлэхээс өмнө" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #e74c3c;">1. Эхлэхээс өмнө</span>
+                    <div class="img-container">
+                        <img src="images/bath1.jpg" alt="Эхлэхээс өмнө">
+                        <span class="lbl-red">1. Эхлэхээс өмнө</span>
                     </div>
-                    <div style="text-align: center;">
-                        <img src="images/bath2.jpg" alt="Гүйцэтгэх явц" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #f39c12;">2. Хийж буй явц</span>
+                    <div class="img-container">
+                        <img src="images/bath2.jpg" alt="Гүйцэтгэх явц">
+                        <span class="lbl-yellow">2. Хийж буй явц</span>
                     </div>
-                    <div style="text-align: center;">
-                        <img src="images/bath3.jpg" alt="Дууссаны дараа" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-                        <span style="display: block; margin-top: 8px; font-weight: 600; font-size: 14px; color: #27ae60;">3. Хийсний дараа</span>
+                    <div class="img-container">
+                        <img src="images/bath3.jpg" alt="Дууссаны дараа">
+                        <span class="lbl-green">3. Хийсний дараа</span>
                     </div>
                 </div>
-                <p style="color: #666; font-size: 14px; margin-top: 15px;"><strong>Хийсэн ажлууд:</strong> XPS хавтан болон гидроизоляци ашиглан чийг тусгаарлалт хийж, кварцан болон керамик плита наан, сантехникийн холболтуудыг бүрэн шинэчилсэн.</p>
+                <p class="project-desc"><strong>Хийсэн ажлууд:</strong> XPS хавтан болон гидроизоляци ашиглан чийг тусгаарлалт хийж, кварцан болон керамик плита наан, сантехникийн холболтуудыг бүрэн шинэчилсэн.</p>
+            </div>
+
+            <!-- ШИНЭЭР НЭМСЭН ХЭСЭГ: Бидний хэрэгжүүлсэн төсөл (30 зураг болон 3 видео) -->
+            <div class="project-gallery-section">
+                <h2>Бидний хэрэгжүүлсэн төсөл</h2>
+                <p class="gallery-subtitle">Эхэнд, дунд, дараах үе шатны бодит зургууд болон видео танилцуулга</p>
+                
+                <!-- 30 Зургийн Grid -->
+                <div class="gallery-grid">
+                    <!-- Загвар болгон 30 ширхэг зургийн блокыг оруулав (Зургийн файлын нэрээ солино уу) -->
+                    <div class="gallery-item"><img src="images/work1.jpg" alt="Төслийн зураг 1"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work2.jpg" alt="Төслийн зураг 2"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work3.jpg" alt="Төслийн зураг 3"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work4.jpg" alt="Төслийн зураг 4"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work5.jpg" alt="Төслийн зураг 5"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work6.jpg" alt="Төслийн зураг 6"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work7.jpg" alt="Төслийн зураг 7"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work8.jpg" alt="Төслийн зураг 8"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work9.jpg" alt="Төслийн зураг 9"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work10.jpg" alt="Төслийн зураг 10"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work11.jpg" alt="Төслийн зураг 11"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work12.jpg" alt="Төслийн зураг 12"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work13.jpg" alt="Төслийн зураг 13"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work14.jpg" alt="Төслийн зураг 14"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work15.jpg" alt="Төслийн зураг 15"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work16.jpg" alt="Төслийн зураг 16"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work17.jpg" alt="Төслийн зураг 17"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work18.jpg" alt="Төслийн зураг 18"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work19.jpg" alt="Төслийн зураг 19"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work20.jpg" alt="Төслийн зураг 20"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work21.jpg" alt="Төслийн зураг 21"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work22.jpg" alt="Төслийн зураг 22"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work23.jpg" alt="Төслийн зураг 23"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work24.jpg" alt="Төслийн зураг 24"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work25.jpg" alt="Төслийн зураг 25"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work26.jpg" alt="Төслийн зураг 26"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work27.jpg" alt="Төслийн зураг 27"><span>Дууссан</span></div>
+                    <div class="gallery-item"><img src="images/work28.jpg" alt="Төслийн зураг 28"><span>Эхлэл</span></div>
+                    <div class="gallery-item"><img src="images/work29.jpg" alt="Төслийн зураг 29"><span>Явц</span></div>
+                    <div class="gallery-item"><img src="images/work30.jpg" alt="Төслийн зураг 30"><span>Дууссан</span></div>
+                </div>
+                               <!-- 3 YouTube Видео -->
+                <h3 class="video-section-title">Төслийн видео танилцуулга</h3>
+                <div class="video-grid">
+                    <div class="video-item">
+                        <iframe src="https://www.youtube.com/embed/qRH-pCIGFb8" title="YouTube video 1" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-item">
+                        <iframe src="https://www.youtube.com/embed/mBikRoJLjmE" title="YouTube video 2" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-item">
+                        <iframe src="https://www.youtube.com/embed/PCpZbKbKVe8" title="YouTube video 3" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <!-- Санал хүсэлт илгээх хэсэг (Зөв хэмжээтэй, голдоо байрлах) -->
+        <!-- Санал хүсэлт илгээх хэсэг -->
         <div class="comment-box">
-            <h3 style="margin-bottom: 20px; color: #222; font-size: 20px;">Танд хийлгэх гэж буй засварынхаа талаар асууж тодоруулах зүйл байвал бидэнтэй холбогдоорой.</h3>
+            <h3>Танд хийлгэх гэж буй засварынхаа талаар асууж тодоруулах зүйл байвал бидэнтэй холбогдоорой.</h3>
             <form class="comment-form">
                 <input type="text" placeholder="Таны нэр" required>
                 <input type="email" placeholder="Цахим шуудан" required>
                 <textarea rows="5" placeholder="Хийлгэх гэж буй засварынхаа тухай бичнэ үү..." required></textarea>
-                <button type="submit" class="hero red-btn" style="padding: 12px 30px; cursor: pointer; border: none; background: #ff523b; color: #fff; border-radius: 5px; font-weight: 600;">ХҮСЭЛТ ИЛГЭЭХ</button>
+                <button type="submit" class="hero red-btn">ХҮСЭЛТ ИЛГЭЭХ</button>
             </form>
         </div>
     </section>
@@ -189,11 +195,9 @@
             <a href="https://www.instagram.com/voehringer_gmbh_und_co._kg/" target="_blank" rel="noopener noreferrer" style="color: #e4405f;">
                 <i class="fa-brands fa-instagram"></i>
             </a>
-            <!-- LinkedIn -->
             <a href="https://www.linkedin.com/company/vöhringer-gmbh-&-co.-kg/" target="_blank" rel="noopener noreferrer" style="color: #0a66c2;">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
-            <!-- YouTube -->
             <a href="https://www.youtube.com/watch?v=nw7YdZEaxRw" target="_blank" rel="noopener noreferrer" style="color: #ff0000;">
                 <i class="fa-brands fa-youtube"></i>
             </a>

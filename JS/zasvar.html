@@ -1,252 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обой & SPC Шал Угсралтын Үйлчилгээ</title>
+    <title>Обой & SPC Шал Угсралтын Үйлчилгээ | Pros Building</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* --- НЭМЭЛТ CSS (Галерей, Видео, Чатбот) --- */
-        .gallery-section {
-            width: 90%;
-            max-width: 1200px;
-            margin: 60px auto;
-            text-align: center;
-        }
-        .gallery-section h2 {
-            font-size: 2rem;
-            color: #1a202c;
-            margin-bottom: 10px;
-        }
-        .gallery-section p {
-            color: #718096;
-            margin-bottom: 40px;
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 12px;
-        }
-        .gallery-item {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .gallery-item:hover {
-            transform: scale(1.03);
-            z-index: 10;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            display: block;
-        }
-        .fb-btn-container {
-            margin-top: 40px;
-        }
-        .fb-btn {
-            display: inline-block;
-            padding: 14px 35px;
-            background-color: #1877f2;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(24,119,242,0.3);
-        }
-        .fb-btn:hover {
-            background-color: #166fe5;
-            transform: translateY(-2px);
-        }
-
-        .video-section {
-            width: 90%;
-            max-width: 1200px;
-            margin: 60px auto;
-            text-align: center;
-        }
-        .video-section h2 {
-            font-size: 2rem;
-            color: #1a202c;
-            margin-bottom: 10px;
-        }
-        .video-section p {
-            color: #718096;
-            margin-bottom: 40px;
-        }
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .video-item {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .video-item iframe {
-            width: 100%;
-            height: 200px;
-            border: none;
-        }
-
-        /* --- CHATBOT --- */
-        .chatbot-toggle {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #2563eb;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 1.6rem;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(37,99,235,0.4);
-            z-index: 9999;
-            transition: transform 0.2s, background 0.3s;
-        }
-        .chatbot-toggle:hover {
-            transform: scale(1.1);
-            background: #1d4ed8;
-        }
-        .chatbot-window {
-            position: fixed;
-            bottom: 100px;
-            right: 25px;
-            width: 350px;
-            max-width: 90vw;
-            height: 450px;
-            max-height: 70vh;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        /* Modal стилүүд */
+        .modal {
             display: none;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 9999;
-            border: 1px solid #e2e8f0;
-        }
-        .chatbot-window.open {
-            display: flex;
-        }
-        .chatbot-header {
-            background: #2563eb;
-            color: #fff;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
             align-items: center;
         }
-        .chatbot-header h4 {
-            margin: 0;
-            font-size: 1rem;
-        }
-        .chatbot-header button {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-        .chatbot-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background: #f7fafc;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .chatbot-msg {
-            max-width: 80%;
-            padding: 10px 14px;
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
             border-radius: 12px;
-            font-size: 0.9rem;
-            line-height: 1.4;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+            position: relative;
         }
-        .chatbot-msg.bot {
-            background: #e2e8f0;
-            color: #1a202c;
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-        .chatbot-msg.user {
-            background: #2563eb;
-            color: #fff;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-        .chatbot-input {
-            display: flex;
-            border-top: 1px solid #e2e8f0;
-        }
-        .chatbot-input input {
-            flex: 1;
-            padding: 12px 15px;
-            border: none;
-            outline: none;
-            font-size: 0.9rem;
-        }
-        .chatbot-input button {
-            background: #2563eb;
-            color: #fff;
-            border: none;
-            padding: 0 20px;
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.2s;
+            color: #64748b;
         }
-        .chatbot-input button:hover {
-            background: #1d4ed8;
+        /* Gallery стилүүд */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
-        .chatbot-quick {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            padding: 10px 15px;
+        .gallery-card {
             background: #fff;
-            border-top: 1px solid #e2e8f0;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .chatbot-quick button {
-            background: #ebf8ff;
-            color: #2563eb;
-            border: 1px solid #bee3f8;
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: background 0.2s;
+        .gallery-img-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
         }
-        .chatbot-quick button:hover {
-            background: #bee3f8;
+        .gallery-img-container img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
         }
-        @media (max-width: 500px) {
-            .chatbot-window {
-                width: 95vw;
-                right: 2.5vw;
-            }
+        .img-label {
+            position: absolute;
+            bottom: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 2px 8px;
+            font-size: 11px;
+            border-radius: 4px;
         }
+        .before-label { left: 10px; }
+        .after-label { right: 10px; background: #16a34a; }
     </style>
 </head>
 
 <body>
 
+    <!-- 1. HEADER & NAVIGATION -->
     <header class="sub-header">    
         <nav>
-            <a href="logo"> <img src="images/logo.png" alt=""></a>
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Logo"></a>
             <div class="nav-links" id="navLinks">
                 <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                 <ul>
@@ -254,24 +91,96 @@
                     <li><a href="vöhringer.html">Vöhringer</a></li>
                     <li><a href="gonick.html">Гоник</a></li>
                     <li><a href="blog.html">Захиалагчийн булан</a></li>
-                    <li><a href="calculator.html">Тооцоолол</a></li>
                     <li><a href="zasvar.html">Засвар</a></li>
+                    <li><a href="calculator.html">Тооцоолол</a></li>
                     <li><a href="projects.html">Төслүүд</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
             <i class="fa-solid fa-bars" onclick="showMenu()"></i>
         </nav>                    
-       <h1>Обой наалт болон SPC шал угсралт</h1>
-    </header>
-
-    <header class="head">
-        <div class="container">
-            <p>Найдвартай үйлчилгээг нэг дороос</p>
-            <a href="#calculator" class="btn-primary">Үнэ тооцоолох & Захиалах</a>
+        <div>
+            <h1>Обой наалт & засварын үйлчилгээ</h1>
+            <a href="#calculator" class="hero btn-primary">Үнэ тооцоолох & Захиалах</a>
         </div>
     </header>
 
+    <!-- 2. TRUST BANNER (Clickable Modal Trigger) -->
+    <div class="trust-banner" onclick="openEscrowModal()" style="cursor: pointer;" title="Дэлгэрэнгүй үзэх бол дарна уу">
+        <div class="trust-content">
+            <i class="fa-solid fa-shield-halved" style="font-size: 24px; color: #2563eb;"></i>
+            <div>
+                <strong>Эскроу баталгаатай систем:</strong> Захиалагч мөнгөө платформд байршуулж, ажил дууссаны дараа шилжинэ. <span style="color: #2563eb; text-decoration: underline; margin-left: 5px;">Дэлгэрэнгүй үзэх</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ESCROW MODAL WINDOW (Байрны засварын явц & Эскроу баталгаа) -->
+    <div id="escrowModal" class="modal">
+        <div class="modal-content" style="max-width: 650px; max-height: 85vh; overflow-y: auto;">
+            <span class="close-btn" onclick="closeEscrowModal()">&times;</span>
+            <h3 style="color: #1e293b; margin-bottom: 10px; font-size: 1.3rem;">
+                <i class="fa-solid fa-shield-halved" style="color: #2563eb;"></i> Эскроу Баталгаа ба Байрны Засварын Явц
+            </h3>
+            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                Эскроу систем нь захиалагч болон засварын бригад хоорондын төлбөрийн найдвартай байдлыг 100% хангадаг баталгаа юм.
+            </p>
+
+            <!-- Шат дараалсан процессууд -->
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                
+                <!-- Step 1 -->
+                <div style="display: flex; gap: 12px; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid #2563eb;">
+                    <div style="background: #2563eb; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0;">1</div>
+                    <div style="font-size: 0.88rem; color: #334155; line-height: 1.5;">
+                        <strong>Урьдчилсан тооцоолол ба судалгаа:</strong><br>
+                        Материал, засварын бригадын судалгаа, мэдээлэл болон урьдчилсан тооцооллыг та одоо энд системээр хийж байна.
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div style="display: flex; gap: 12px; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid #0284c7;">
+                    <div style="background: #0284c7; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0;">2</div>
+                    <div style="font-size: 0.88rem; color: #334155; line-height: 1.5;">
+                        <strong>Хэмжилт & Бодит тооцоолол:</strong><br>
+                        Платформын төлөөлөгч захиалагчийн хүсэлтийн дагуу засварын газарт хэмжилт, үзлэг хийсний үндсэн дээр бодит тооцооллыг гаргаж өгнө. Үүнд шаардлагатай материалын жагсаалт, үнэ, ажлын хөлс, хугацааг багтаасан байна.
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div style="display: flex; gap: 12px; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid #d97706;">
+                    <div style="background: #d97706; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0;">3</div>
+                    <div style="font-size: 0.88rem; color: #334155; line-height: 1.5;">
+                        <strong>Гэрээ байгуулах & Ажил эхлэх:</strong><br>
+                        Захиалагч хүлээн зөвшөөрч хугацааг товлосон тохиолдолд гэрээ хийгдэн төлбөр шилжигдэж дансанд орсны дараагаар ажил эхэлнэ.
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div style="display: flex; gap: 12px; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid #dc2626;">
+                    <div style="background: #dc2626; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0;">4</div>
+                    <div style="font-size: 0.88rem; color: #334155; line-height: 1.5;">
+                        <strong>Үе шатны чанарын шалгалт & Төлбөр:</strong><br>
+                        Дараагийн төлбөрүүдийг платформын хяналтын мэргэжилтэн гүйцэтгэгчийн ажлын чанарыг үе бүрээр гэрээнд заасны чанарын хуудсын дагуу шалгаж шаардлага хангаж байвал баталгаажуулж гарын үсэг зурснаар төлбөр хийгдэнэ. Чанарын шаардлага хангаагүй тохиолдолд төлбөрийг шилжүүлэхээс уг асуудлыг шийдтэл татгалзана.
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div style="display: flex; gap: 12px; background: #f0fdf4; padding: 12px; border-radius: 8px; border-left: 4px solid #16a34a;">
+                    <div style="background: #16a34a; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0;">5</div>
+                    <div style="font-size: 0.88rem; color: #334155; line-height: 1.5;">
+                        <strong>Ажил хүлээж авах & Эскроу хаагдах:</strong><br>
+                        Ажил бүрэн дууссан үед мэргэжилтэн, захиалагч нар шалгаж шаардлага хангаж байвал ажлыг хүлээн авсан акт үйлдэж гарын үсэг зурснаар ажил албан ёсоор дуусаж хүлээлгэн өгсөнд тооцож үлдэгдэл төлбөр бүрэн шилжигдсэнээр энэ ажлын <strong>Эскроу Баталгаа</strong> дуусаж хаагдана.
+                    </div>
+                </div>
+
+            </div>
+
+            <button onclick="closeEscrowModal()" class="btn-dark" style="width: 100%; margin-top: 20px;">Ойлголоо</button>
+        </div>
+    </div>
+
+    <!-- 3. FEATURES -->
     <section class="features-grid">
         <div class="feature-card">
             <div class="feature-icon"><i class="fa-solid fa-paint-roller" style="color: #2563eb;"></i></div>
@@ -290,142 +199,254 @@
         </div>
     </section>
 
-    <!-- CALCULATOR & BOOKING SECTION -->
-    <section id="calculator" class="calculator-section">
-        <h2>Урьдчилсан Үнийн Тооцоолуур</h2>        
-        <div>
-            <div class="form-group">
-                <label>Обой орох рулон тоо:</label>
-                <input type="number" id="rolls" placeholder="Жишээ нь: 10">
-            </div>
-            <div class="form-group">
-                <label>SPC шал угсрах талбай (м.кв):</label>
-                <input type="number" id="floorM2" placeholder="Жишээ нь: 40">
-            </div>
-            <button onclick="calculatePrice()" class="btn-dark">Үнийг тооцох</button>
-            <div id="resultBox" class="result-box hidden">
-                <p class="result-title">Тооцоолсон урьдчилсан дүнгээр:</p>
-                <p id="totalPrice" class="result-price">0 ₮</p>
-                <p class="result-note">* Материал болон ажлын хөлс нийлсэн ойролцоо дүнгээр тооцов.</p>
-            </div>
-        </div>
+    <!-- Бригадуудын мэдээлэл харуулах хэсэг -->
+<div class="brigade-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; padding: 20px; font-family: 'Calibri', sans-serif;">
 
-        <div class="order-container">
-            <h3>Захиалга өгөх</h3>
-            <form id="orderForm" onsubmit="sendOrder(event)">
-                <div class="form-group">
-                    <label style="font-size: 0.875rem;">Таны нэр:</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label style="font-size: 0.875rem;">Утасны дугаар:</label>
-                    <input type="tel" id="phone" required>
-                </div>
-                <div class="form-group">
-                    <label style="font-size: 0.875rem;">Хаяг (Байр / Хороолол):</label>
-                    <input type="text" id="address" required>
-                </div>
-                <button type="submit" class="btn-submit">Захиалга илгээх</button>
-            </form>
-            <div id="successMsg" class="success-msg hidden">
-                Амжилттай захиалга илгээгдлээ! Бид тун удахгүй тантай холбогдох болно.
-            </div>
+    <!-- Бригад 1 -->
+    <div class="brigade-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; width: 280px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center;">
+        <div style="width: 70px; height: 70px; background: #1F4E78; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; font-size: 24px; font-weight: bold;">НБ</div>
+        <h3 style="margin: 0 0 10px 0; color: #1F4E78; font-size: 18px;">Бригадын ахлагч: Наранбаатар</h3>
+        <p style="color: #555; font-size: 14px; margin: 5px 0;">Стандарт засвар, обой, шпаклевк</p>
+        <div style="background: #F2F4F7; padding: 8px; border-radius: 5px; margin-top: 15px;">
+            <span style="color: #f39c12; font-size: 16px; font-weight: bold;">★ 4.8</span>
+            <span style="color: #7f8c8d; font-size: 13px; margin-left: 5px;">(Шилдэг A-Rank)</span>
         </div>
-    </section>
+    </div>
 
-    <!-- ============================================================ -->
-    <!-- ГАЛЕРЕЙ СЕКЦ - 36 ЗУРАГ -->
-    <!-- ============================================================ -->
-    <section class="gallery-section" id="gallery">
-        <h2>Бидний хийсэн ажлууд</h2>
-        <p>Хийсэн ажлын зураг, видео мэдээллийг эндээс үзээрэй</p>
+    <!-- Бригад 2 -->
+    <div class="brigade-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; width: 280px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center;">
+        <div style="width: 70px; height: 70px; background: #1F4E78; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; font-size: 24px; font-weight: bold;">БХ</div>
+        <h3 style="margin: 0 0 10px 0; color: #1F4E78; font-size: 18px;">Бригадын ахлагч: Бат-Эрдэнэ</h3>
+        <p style="color: #555; font-size: 14px; margin: 5px 0;">SPC шал, нарийн угсралт</p>
+        <div style="background: #F2F4F7; padding: 8px; border-radius: 5px; margin-top: 15px;">
+            <span style="color: #f39c12; font-size: 16px; font-weight: bold;">★ 4.9</span>
+            <span style="color: #7f8c8d; font-size: 13px; margin-left: 5px;">(Шилдэг A-Rank)</span>
+        </div>
+    </div>
+
+    <!-- Бригад 3 -->
+    <div class="brigade-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; width: 280px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center;">
+        <div style="width: 70px; height: 70px; background: #1F4E78; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; font-size: 24px; font-weight: bold;">ГЗ</div>
+        <h3 style="margin: 0 0 10px 0; color: #1F4E78; font-size: 18px;">Бригадын ахлагч: Ганзориг</h3>
+        <p style="color: #555; font-size: 14px; margin: 5px 0;">Бүрэн иж бүрэн засвар</p>
+        <div style="background: #F2F4F7; padding: 8px; border-radius: 5px; margin-top: 15px;">
+            <span style="color: #f39c12; font-size: 16px; font-weight: bold;">★ 4.7</span>
+            <span style="color: #7f8c8d; font-size: 13px; margin-left: 5px;">(Шилдэг A-Rank)</span>
+        </div>
+    </div>
+
+</div>
+
+    <!-- 4. BEFORE / AFTER GALLERY & VIDEO SECTION -->
+    <section class="calculator-section" style="background: #f8fafc;">
+        <h2 class="section-title"><i class="fa-solid fa-images" style="color: #2563eb;"></i> Хийсэн Ажлын Үр Дүн (Before / After & Видео)</h2>
+        <p style="text-align: center; color: #64748b; margin-bottom: 25px; font-size: 0.9rem;">Манай мастеруудын засаж тохижуулсан бодит байрнуудын өөрчлөлт ба бичлэгүүд</p>
         
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="images/work1.jpg" alt="Ажлын зураг 1"></div>
-            <div class="gallery-item"><img src="images/work2.jpg" alt="Ажлын зураг 2"></div>
-            <div class="gallery-item"><img src="images/work3.jpg" alt="Ажлын зураг 3"></div>
-            <div class="gallery-item"><img src="images/work4.jpg" alt="Ажлын зураг 4"></div>
-            <div class="gallery-item"><img src="images/work5.jpg" alt="Ажлын зураг 5"></div>
-            <div class="gallery-item"><img src="images/work6.jpg" alt="Ажлын зураг 6"></div>
-            <div class="gallery-item"><img src="images/work7.jpg" alt="Ажлын зураг 7"></div>
-            <div class="gallery-item"><img src="images/work8.jpg" alt="Ажлын зураг 8"></div>
-            <div class="gallery-item"><img src="images/work9.jpg" alt="Ажлын зураг 9"></div>
-            <div class="gallery-item"><img src="images/work10.jpg" alt="Ажлын зураг 10"></div>
-            <div class="gallery-item"><img src="images/work11.jpg" alt="Ажлын зураг 11"></div>
-            <div class="gallery-item"><img src="images/work12.jpg" alt="Ажлын зураг 12"></div>
-            <div class="gallery-item"><img src="images/work13.jpg" alt="Ажлын зураг 13"></div>
-            <div class="gallery-item"><img src="images/work14.jpg" alt="Ажлын зураг 14"></div>
-            <div class="gallery-item"><img src="images/work15.jpg" alt="Ажлын зураг 15"></div>
-            <div class="gallery-item"><img src="images/work16.jpg" alt="Ажлын зураг 16"></div>
-            <div class="gallery-item"><img src="images/work17.jpg" alt="Ажлын зураг 17"></div>
-            <div class="gallery-item"><img src="images/work18.jpg" alt="Ажлын зураг 18"></div>
-            <div class="gallery-item"><img src="images/work19.jpg" alt="Ажлын зураг 19"></div>
-            <div class="gallery-item"><img src="images/work20.jpg" alt="Ажлын зураг 20"></div>
-            <div class="gallery-item"><img src="images/work21.jpg" alt="Ажлын зураг 21"></div>
-            <div class="gallery-item"><img src="images/work22.jpg" alt="Ажлын зураг 22"></div>
-            <div class="gallery-item"><img src="images/work23.jpg" alt="Ажлын зураг 23"></div>
-            <div class="gallery-item"><img src="images/work24.jpg" alt="Ажлын зураг 24"></div>
-            <div class="gallery-item"><img src="images/work25.jpg" alt="Ажлын зураг 25"></div>
-            <div class="gallery-item"><img src="images/work26.jpg" alt="Ажлын зураг 26"></div>
-            <div class="gallery-item"><img src="images/work27.jpg" alt="Ажлын зураг 27"></div>
-            <div class="gallery-item"><img src="images/work28.jpg" alt="Ажлын зураг 28"></div>
-            <div class="gallery-item"><img src="images/work29.jpg" alt="Ажлын зураг 29"></div>
-            <div class="gallery-item"><img src="images/work30.jpg" alt="Ажлын зураг 30"></div>
-            <div class="gallery-item"><img src="images/work31.jpg" alt="Ажлын зураг 31"></div>
-            <div class="gallery-item"><img src="images/work32.jpg" alt="Ажлын зураг 32"></div>
-            <div class="gallery-item"><img src="images/work33.jpg" alt="Ажлын зураг 33"></div>
-            <div class="gallery-item"><img src="images/work34.jpg" alt="Ажлын зураг 34"></div>
-            <div class="gallery-item"><img src="images/work35.jpg" alt="Ажлын зураг 35"></div>
-            <div class="gallery-item"><img src="images/work36.jpg" alt="Ажлын зураг 36"></div>
-        </div>
+            <!-- Зураг 1: 77м2 байр -->
+            <div class="gallery-card">
+                <div class="gallery-img-container">
+                    <img src="images/work20.jpg" alt="Өмнө" onerror="this.src='https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=400'">
+                    <span class="img-label before-label">Өмнө</span>
+                    <img src="images/room1_after.jpg" alt="Дараа" onerror="this.src='https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400'">
+                    <span class="img-label after-label">Дараа</span>
+                </div>
+                <div style="padding: 15px;">
+                    <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">ХУД, 77м² 3 өрөө байр</h4>
+                    <p style="font-size: 13px; color: #64748b;">Ханын замаск, грунт болон флизелин обой наалт хийгдэв.</p>
+                </div>
+            </div>
 
-        <div class="fb-btn-container">
-            <!-- Энд Барилгачин Гэр Бүлийн Facebook пейж руу шилжинэ -->
-            <a href="https://www.facebook.com/profile.php?id=61560788698223" target="_blank" class="fb-btn">Бүх зургийг Facebook-ээс үзэх</a>
+            <!-- Зураг 2: 55м2 байр -->
+            <div class="gallery-card">
+                <div class="gallery-img-container">
+                    <img src="images/work17.jpg" alt="Өмнө" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400'">
+                    <span class="img-label before-label">Өмнө</span>
+                    <img src="images/room2_after.jpg" alt="Дараа" onerror="this.src='https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=400'">
+                    <span class="img-label after-label">Дараа</span>
+                </div>
+                <div style="padding: 15px;">
+                    <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">БЗД, 55м² 2 өрөө байр</h4>
+                    <p style="font-size: 13px; color: #64748b;">Хуучин обой хуулж шинээр угаадаг обой наалаа.</p>
+                </div>
+            </div>
+
+            <!-- Видео Контент 3: Засварын явц бичлэг (Сонголтоор) -->
+            <div class="gallery-card">
+                <div style="position: relative; height: 180px; background: #000;">
+                    <video controls style="width: 100%; height: 100%; object-fit: cover;">
+                        
+                        <div class="video-item">
+                            <iframe src="https://www.youtube.com/embed/mBikRoJLjmE" title="YouTube video 2" allowfullscreen></iframe>
+                        </div>
+                        Таны браузер видео дэмжихгүй байна.
+                    </video>
+                </div>
+                <div style="padding: 15px;">
+                    <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;"><i class="fa-solid fa-video" style="color: #2563eb;"></i> Засварын бодит явц (Reels)</h4>
+                    <p style="font-size: 13px; color: #64748b;">Мастеруудын хана тэгшилж, обой нааж буй явцын богино бичлэг.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- ВИДЕО СЕКЦ -->
-    <!-- ============================================================ -->
-    <section class="video-section" id="video">
-        <h2>Бидний видео</h2>
-        <p>Хийсэн ажлын видео мэдээллийг эндээс үзээрэй</p>
+    <!-- 5. CALCULATOR & BOOKING SECTION -->
+    <section id="calculator" class="calculator-section">
+        <h2 class="section-title">Обой Наалт Урьдчилсан Тооцоолуур</h2>
         
-        <div class="video-grid">
-            <div class="video-item">
-                <iframe src="https://www.youtube.com/embed/PCpZbKbKVe8" allowfullscreen></iframe>
+        <!-- Тооцоолох арга сонгох хэсэг -->
+        <div class="form-group" style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+            <label style="font-weight: 600; margin-bottom: 10px; display: block;">Тооцоолох арга сонгох:</label>
+            <div style="display: flex; gap: 20px;">
+                <label style="cursor: pointer; font-weight: normal;">
+                    <input type="radio" name="calcMethod" value="rooms" checked onclick="toggleCalcMethod()"> Өрөөний хананы хэмжээгээр
+                </label>
+                <label style="cursor: pointer; font-weight: normal;">
+                    <input type="radio" name="calcMethod" value="totalArea" onclick="toggleCalcMethod()"> Байрны нийт талбайгаар (м²)
+                </label>
             </div>
-            <div class="video-item">
-                <iframe src="https://www.youtube.com/embed/mBikRoJLjmE?start=69" allowfullscreen></iframe>
+        </div>
+
+        <!-- Арга 1: Өрөөний хананы хэмжээгээр тооцох -->
+        <div id="methodRooms">
+            <div class="form-group">
+                <label for="roomCount">Өрөөний тоо сонгох:</label>
+                <select id="roomCount" onchange="generateRoomInputs()" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:5px;">
+                    <option value="1">1 өрөө</option>
+                    <option value="2">2 өрөө</option>
+                    <option value="3" selected>3 өрөө</option>
+                    <option value="4">4 өрөө</option>
+                </select>
             </div>
-            <div class="video-item">
-                <iframe src="https://www.youtube.com/embed/qRH-pCIGFb8" allowfullscreen></iframe>
+            <div id="roomsInputContainer" style="margin-top: 15px;"></div>
+        </div>
+
+        <!-- Арга 2: Байрны нийт талбайгаар (м²) тооцох -->
+        <div id="methodTotalArea" style="display: none;">
+            <div class="form-group">
+                <label>Байрны нийт шалны талбай (м²):</label>
+                <input type="number" id="totalFloorArea" placeholder="Жишээ нь: 77" min="0" step="1" oninput="calculatePrice()" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:5px;">
+                <small style="color: #64748b; display: block; margin-top: 5px;">* Шалны талбайгаас хамааруулан хананы нийт талбайг автоматаар (коэффициент 2.45-аар) тооцоолно.</small>
+            </div>
+        </div>
+
+        <div class="calc-info-box" style="margin-top: 20px;">
+            <div>Тооцоолсон нийт талбай: <span id="calcM2">0.00</span> м²</div>
+            <div>Шаардлагатай рулоны тоо: <span id="calcRolls">0</span> ширхэг</div>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px;">
+            <label><i class="fa-solid fa-tags"></i> Рулон обойны үнэ сонгох (5,000₮ - 50,000₮):</label>
+            <select id="rollPriceOption" onchange="calculatePrice()">
+                <option value="5000">5,000 ₮ / рулон</option>
+                <option value="8000" selected>8,000 ₮ / рулон</option>
+                <option value="10000">10,000 ₮ / рулон</option>
+                <option value="12000">12,000 ₮ / рулон</option>
+                <option value="15000">15,000 ₮ / рулон</option>
+                <option value="18000">18,000 ₮ / рулон</option>
+                <option value="25000">25,000 ₮ / рулон</option>
+                <option value="30000">30,000 ₮ / рулон</option>
+                <option value="40000">40,000 ₮ / рулон</option>
+                <option value="50000">50,000 ₮ / рулон</option>
+            </select>
+        </div>
+
+        <div class="block-title"><i class="fa-solid fa-list-check"></i> 2. Туслах болон үндсэн ажлууд сонгох</div>
+        <div class="checklist-grid">
+            <div class="check-item" style="background: #eff6ff; border-color: #bfdbfe;">
+                <label><input type="checkbox" id="stepWallpaper" checked onchange="calculatePrice()"> Үндсэн обой наах үйлчилгээ</label>
+                <span class="price-tag">~9,000 ₮ / м²</span>
+            </div>
+            <div class="check-item">
+                <label><input type="checkbox" id="stepStrip" onchange="calculatePrice()"> Хуучин обой хуулах</label>
+                <span class="price-tag">~2,500 ₮ / м²</span>
+            </div>
+            <div class="check-item">
+                <label><input type="checkbox" id="stepPutty" onchange="calculatePrice()"> Замаск татах, хана тэгшлэх (2 үе)</label>
+                <span class="price-tag">~7,500 ₮ / м²</span>
+            </div>
+            <div class="check-item">
+                <label><input type="checkbox" id="stepPrimer" onchange="calculatePrice()"> Праймер / грунт түрхэх</label>
+                <span class="price-tag">~1,750 ₮ / м²</span>
+            </div>
+            <div class="check-item">
+                <label><input type="checkbox" id="stepClean" onchange="calculatePrice()"> Төгсгөлийн цэвэрлэгээ (Хог бөөгнүүлэх)</label>
+                <span class="price-tag">~20,000 ₮</span>
+            </div>
+        </div>
+
+        <button type="button" onclick="calculatePrice()" class="btn-dark">Үнийн тооцоолол</button>
+
+        <div id="resultBox" class="result-box hidden">
+            <div class="result-breakdown">
+                <div class="result-section-title">
+                    <span>1. Ажлын хөлсний нийт дүн:</span> 
+                    <strong id="laborTotal">0 ₮</strong>
+                </div>
+                <div id="laborSubItems"></div>
+
+                <div class="result-section-title" style="margin-top: 15px;">
+                    <span>2. Материалын нийт дүн:</span> 
+                    <strong id="materialTotal">0 ₮</strong>
+                </div>
+                <div id="materialSubItems"></div>
+            </div>
+
+            <p style="margin: 15px 0 0; color:#64748b; font-size: 0.9rem; text-align: center;">Нийт Урьдчилсан Үнэ:</p>
+            <p id="totalPrice" class="result-price">0 ₮</p>
+            
+            <div class="real-price-note">
+                <i class="fa-solid fa-circle-info" style="color: #2563eb;"></i> <strong>Анхааруулга:</strong> Яг бодит байдал дээр захиалагчийн талбайн хэмжээ болон нөхцөл байдлыг мастер газар дээр нь очиж биечлэн хэмжиж нарийвчлан тогтоосноор <strong>Жинхэнэ Бодит Үнэ</strong> гарч ирнэ. Гэхдээ бидний Нийт Урьдчилсан Үнэ ба Жинхэнэ Бодит Үнэ хооронд нэг их хол зөрөхгүй байх болно гэж найдаж байна.
+            </div>
+        </div>
+
+        <div style="margin-top: 35px; border-top: 2px dashed #e2e8f0; padding-top: 20px;">
+            <div class="block-title"><i class="fa-solid fa-paper-plane"></i> 3. Захиалга өгөх & Баталгаажуулах</div>
+            <form id="orderForm" onsubmit="sendOrder(event)">
+                <div class="form-group">
+                    <label>Таны нэр:</label>
+                    <input type="text" id="name" required placeholder="Нэрээ оруулна уу">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Утасны дугаар:</label>
+                        <input type="tel" id="phone" required placeholder="9911XXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Хаяг (Байр / Хороолол):</label>
+                        <input type="text" id="address" required placeholder="ХУД, 2-р хороо...">
+                    </div>
+                </div>
+                <button type="submit" class="btn-dark" style="background:#16a34a;">Захиалга илгээх</button>
+            </form>
+            <div id="successMsg" class="success-msg hidden">
+                Амжилттай захиалга илгээгдлээ! Мастерууд тантай тун удахгүй холбогдож газар дээр нь очиж хэмжилт хийх болно.
             </div>
         </div>
     </section>
 
-    <!-- FACEBOOK PAGE SECTION -->
-    <section class="facebook-section">
-        <div class="facebook-title-wrapper">
-            <h2 class="section-title">Манай Facebook Хуудас</h2>
-            <p class="section-subtitle">Шинэ бүтээгдэхүүн, зураг, видео мэдээллийг цаг тухайд нь аваарай</p>
-        </div>
-        
-        <div class="facebook-container">
-            <div class="fb-page" 
-              data-href="https://www.facebook.com/profile.php?id=61560788698223" 
-              data-tabs="timeline" 
-              data-width="450" 
-              data-height="500" 
-              data-small-header="false" 
-              data-adapt-container-width="true" 
-              data-hide-cover="false" 
-              data-show-facepile="true">
+    <!-- 6. АЖИЛ ХҮЛЭЭЛЦЭХ & ЧАНАРЫН ШАЛГАХ ХУУДАС -->
+    <section class="calculator-section" style="border-top: 4px solid #2563eb;">
+        <h2 class="section-title"><i class="fa-solid fa-clipboard-check" style="color: #2563eb;"></i> Ажил Хүлээлцэх & Чанарын Шалгах Хуудас</h2>
+        <p style="text-align: center; color: #64748b; margin-bottom: 20px; font-size: 0.9rem;">Ажил дуусахад бригад болон захиалагч хамтран шалгаж гарын үсэг зурснаар Эскроу төлбөр чөлөөлөгдөнө.</p>
+
+        <div class="checklist-grid">
+            <div class="check-item">
+                <label><input type="checkbox"> Обойн залгаас ба хээ хоорондоо төгс таарсан эсэх</label>
+                <span class="price-tag">Шаардлагатай</span>
+            </div>
+            <div class="check-item">
+                <label><input type="checkbox"> Ажлын дараах барилгын хог хаягдлыг бүрэн цэвэрлэж хүлээлгэн өгсөн эсэх</label>
+                <span class="price-tag">Шаардлагатай</span>
+            </div>
+            <div class="check-item">
+                <label><input type="checkbox"> Илүү гарсан туслах материалыг захиалагчид тоолж буцаан өгсөн эсэх</label>
+                <span class="price-tag">Шаардлагатай</span>
             </div>
         </div>
     </section>
 
+    <!-- 7. FOOTER -->
     <section class="footer">
         <h4>Бидний тухай</h4>
         <p>Паркетан шал • Тавилгын хавтан • Интерьерийн бүрэн шийдэл • Захиалга, Зөвлөгөө</p>
@@ -444,15 +465,11 @@
                 <i class="fa-brands fa-youtube"></i>
             </a>
         </div>
-        <p>Made with <i class="fa-regular fa-heart"></i> by Superior Contruction XXK, Ulaanbaatar, Mongolia, 2026</p>
+        <p>Made with <i class="fa-regular fa-heart"></i> by Superior Construction XXK, Ulaanbaatar, Mongolia, 2026</p>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- CHATBOT - Bagi Service -->
-    <!-- ============================================================ -->
-    <button class="chatbot-toggle" onclick="toggleChatbot()">
-        <i class="fa-solid fa-comment-dots"></i>
-    </button>
+    <!-- 8. CHATBOT (Bagi Service AI Agent) -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()"><i class="fa-solid fa-comment-dots"></i></button>
 
     <div class="chatbot-window" id="chatbotWindow">
         <div class="chatbot-header">
@@ -460,15 +477,11 @@
             <button onclick="toggleChatbot()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="chatbot-messages" id="chatbotMessages">
-            <div class="chatbot-msg bot">
-                Сайн байна уу? Би <strong>Bagi Service</strong> чатбот. Та обой наах, SPC шал угсралтын талаар асууж болно. 😊
-            </div>
+            <div class="chatbot-msg bot">Сайн байна уу? Би <strong>Bagi Service</strong> AI туслах байна. Та обой наалт болон засварын үнэ тооцоолох талаар асуугаарай. 😊</div>
         </div>
         <div class="chatbot-quick">
-            <button onclick="quickReply('Обой наах үнэ')">Обой наах үнэ</button>
-            <button onclick="quickReply('SPC шал үнэ')">SPC шал үнэ</button>
-            <button onclick="quickReply('Захиалга өгөх')">Захиалга өгөх</button>
-            <button onclick="quickReply('Холбоо барих')">Холбоо барих</button>
+            <button onclick="quickReply('Обой наах үнэ')">Обой үнэ</button>
+            <button onclick="quickReply('Захиалга өгөх')">Захиалга</button>
         </div>
         <div class="chatbot-input">
             <input type="text" id="chatbotInput" placeholder="Мессеж бичих..." onkeypress="handleChatKey(event)">
@@ -476,47 +489,157 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- SCRIPT -->
-    <!-- ============================================================ -->
+    <!-- SCRIPTS -->
     <script>
-        // --- NAVIGATION ---
         var navLinks = document.getElementById("navLinks");
         function showMenu() { navLinks.style.right = "0"; }
         function hideMenu() { navLinks.style.right = "-200px"; }
 
-        // --- CALCULATOR ---
+        /* Modal Удирдлага */
+        function openEscrowModal() {
+            document.getElementById("escrowModal").style.display = "flex";
+        }
+        function closeEscrowModal() {
+            document.getElementById("escrowModal").style.display = "none";
+        }
+
+        // Өрөөний input талбаруудыг динамикаар үүсгэх
+        function generateRoomInputs() {
+            let count = document.getElementById("roomCount").value;
+            let container = document.getElementById("roomsInputContainer");
+            container.innerHTML = "";
+
+            for (let i = 1; i <= count; i++) {
+                container.innerHTML += `
+                    <div style="background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 10px; border: 1px solid #e2e8f0;">
+                        <span style="font-weight: 600; font-size: 13px; color: #334155; display: block; margin-bottom: 6px;">${i} - р өрөө</span>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div>
+                                <label style="font-size: 12px; color: #64748b;">Хананы урт (м):</label>
+                                <input type="number" id="length_${i}" placeholder="Жишээ нь: 10" min="0" step="0.1" oninput="calculatePrice()" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:4px;">
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; color: #64748b;">Хананы өндөр (м):</label>
+                                <input type="number" id="height_${i}" value="2.5" min="0" step="0.1" oninput="calculatePrice()" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:4px;">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            calculatePrice();
+        }
+
+        window.onload = function() {
+            generateRoomInputs();
+        };
+
+        function toggleCalcMethod() {
+            let method = document.querySelector('input[name="calcMethod"]:checked').value;
+            if (method === 'rooms') {
+                document.getElementById('methodRooms').style.display = 'block';
+                document.getElementById('methodTotalArea').style.display = 'none';
+            } else {
+                document.getElementById('methodRooms').style.display = 'none';
+                document.getElementById('methodTotalArea').style.display = 'block';
+            }
+            calculatePrice();
+        }
+
         function calculatePrice() {
-            let rolls = document.getElementById("rolls").value;
-            let floorM2 = document.getElementById("floorM2").value;
-            let rollPrice = 15000;
-            let floorPrice = 25000;
-            let total = (rolls * rollPrice) + (floorM2 * floorPrice);
+            let method = document.querySelector('input[name="calcMethod"]:checked').value;
+            let m2 = 0;
+
+            if (method === 'rooms') {
+                let count = document.getElementById("roomCount").value;
+                for (let i = 1; i <= count; i++) {
+                    let length = parseFloat(document.getElementById(`length_${i}`).value) || 0;
+                    let height = parseFloat(document.getElementById(`height_${i}`).value) || 0;
+                    m2 += (length * height);
+                }
+            } else {
+                let floorArea = parseFloat(document.getElementById("totalFloorArea").value) || 0;
+                m2 = floorArea * 2.45;
+            }
+            
+            document.getElementById("calcM2").innerText = m2.toFixed(2);
+
+            let rolls = m2 > 0 ? Math.ceil(m2 / 5.6) : 0;
+            document.getElementById("calcRolls").innerText = rolls;
+
+            let laborTotal = 0;
+            let laborHTML = "";
+
+            let rollUnitPrice = parseFloat(document.getElementById("rollPriceOption").value) || 0;
+            let wallpaperMaterialPrice = rolls * rollUnitPrice;
+
+            let materialTotal = wallpaperMaterialPrice;
+            let materialHTML = `<div class="sub-item"><span>↳ Рулон обой (${rolls} ш × ${rollUnitPrice.toLocaleString()}₮)</span> <span>${wallpaperMaterialPrice.toLocaleString()} ₮</span></div>`;
+
+            if(document.getElementById("stepWallpaper").checked) {
+                let cost = m2 * 9000;
+                laborTotal += cost;
+                laborHTML += `<div class="sub-item"><span>↳ Үндсэн обой наах үйлчилгээ (${m2.toFixed(2)} м² × 9,000₮)</span> <span>${cost.toLocaleString()} ₮</span></div>`;
+            }
+            if(document.getElementById("stepStrip").checked) {
+                let cost = m2 * 2500;
+                laborTotal += cost;
+                laborHTML += `<div class="sub-item"><span>↳ Хуучин обой хуулах (${m2.toFixed(2)} м² × 2,500₮)</span> <span>${cost.toLocaleString()} ₮</span></div>`;
+            }
+            if(document.getElementById("stepPutty").checked) {
+                let cost = m2 * 7500;
+                laborTotal += cost;
+                laborHTML += `<div class="sub-item"><span>↳ Замаск татах, хана тэгшлэх (2 үе) (${m2.toFixed(2)} м² × 7,500₮)</span> <span>${cost.toLocaleString()} ₮</span></div>`;
+                
+                let matCost = m2 * 7000;
+                materialTotal += matCost;
+                materialHTML += `<div class="sub-item"><span>↳ Замаск, паста (${m2.toFixed(2)} м² × 7,000₮)</span> <span>${matCost.toLocaleString()} ₮</span></div>`;
+            }
+            if(document.getElementById("stepPrimer").checked) {
+                let cost = m2 * 1750;
+                laborTotal += cost;
+                laborHTML += `<div class="sub-item"><span>↳ Праймер / грунт түрхэх (${m2.toFixed(2)} м² × 1,750₮)</span> <span>${cost.toLocaleString()} ₮</span></div>`;
+
+                let matCost = m2 * 2000;
+                materialTotal += matCost;
+                materialHTML += `<div class="sub-item"><span>↳ Праймер / грунт (${m2.toFixed(2)} м² × 2,000₮)</span> <span>${matCost.toLocaleString()} ₮</span></div>`;
+            }
+            if(document.getElementById("stepClean").checked) {
+                let cost = 20000;
+                laborTotal += cost;
+                laborHTML += `<div class="sub-item"><span>↳ Төгсгөлийн цэвэрлэгээ (Хог бөөгнүүлэх)</span> <span>${cost.toLocaleString()} ₮</span></div>`;
+            }
+
+            let total = laborTotal + materialTotal;
+
+            document.getElementById("laborSubItems").innerHTML = laborHTML;
+            document.getElementById("materialSubItems").innerHTML = materialHTML;
+
             let resultBox = document.getElementById("resultBox");
+            let laborTotalElem = document.getElementById("laborTotal");
+            let materialTotalElem = document.getElementById("materialTotal");
             let totalPriceElem = document.getElementById("totalPrice");
-            if(total > 0) {
+
+            if(m2 > 0) {
+                laborTotalElem.innerText = laborTotal.toLocaleString() + " ₮";
+                materialTotalElem.innerText = materialTotal.toLocaleString() + " ₮";
                 totalPriceElem.innerText = total.toLocaleString() + " ₮";
                 resultBox.classList.remove("hidden");
             } else {
-                alert("Та тоо хэмжээг оруулна уу.");
+                resultBox.classList.add("hidden");
             }
         }
 
-        // --- ORDER FORM ---
-        function sendOrder(event) {
-            event.preventDefault();
+        function sendOrder(e) {
+            e.preventDefault();
             document.getElementById("successMsg").classList.remove("hidden");
             document.getElementById("orderForm").reset();
         }
 
-        // --- CHATBOT ---
+        /* CHATBOT FUNCTIONS (Simulated AI Agent) */
         function toggleChatbot() {
             document.getElementById("chatbotWindow").classList.toggle("open");
         }
-
-        function handleChatKey(event) {
-            if (event.key === "Enter") sendChatMessage();
-        }
+        function handleChatKey(event) { if (event.key === "Enter") sendChatMessage(); }
 
         function sendChatMessage() {
             const input = document.getElementById("chatbotInput");
@@ -524,16 +647,12 @@
             if (msg === "") return;
             addChatMessage(msg, "user");
             input.value = "";
-            setTimeout(() => {
-                addChatMessage(getBotReply(msg), "bot");
-            }, 500);
+            setTimeout(() => addChatMessage(getBotReply(msg), "bot"), 500);
         }
 
         function quickReply(text) {
             addChatMessage(text, "user");
-            setTimeout(() => {
-                addChatMessage(getBotReply(text), "bot");
-            }, 500);
+            setTimeout(() => addChatMessage(getBotReply(text), "bot"), 500);
         }
 
         function addChatMessage(text, sender) {
@@ -547,31 +666,14 @@
 
         function getBotReply(msg) {
             const m = msg.toLowerCase();
-            if (m.includes("обой") && m.includes("үнэ")) {
-                return "Обой наах үнэ: 1 рулон (5.3 м²) тутамд 15,000₮-өөс эхэлнэ. Нарийн үнийг өрөөний хэмжээгээр тооцно. Тооцоолуур ашиглахыг зөвлөж байна.";
-            }
-            if (m.includes("spc") || m.includes("шал")) {
-                return "SPC шал угсралт: 1 м² талбайд 25,000₮-өөс эхэлнэ. Материал болон ажлын хөлс багтсан. Үнэ тооцоолуур ашиглана уу.";
-            }
-            if (m.includes("захиалга")) {
-                return "Захиалга өгөхийн тулд 'Урьдчилсан Үнийн Тооцоолуур' хэсэгт мэдээллээ бөглөөд 'Захиалга илгээх' товчийг дарна уу. Эсвэл 9921-5231 дугаарт залгаарай.";
-            }
-            if (m.includes("холбоо") || m.includes("утас")) {
-                return "Холбоо барих: 📞 9921-5231. Хаяг: Барилга Бизнес Төв, Ажилчны гудамж, ХУД, Улаанбаатар.";
-            }
-            if (m.includes("цаг") || m.includes("ажил")) {
-                return "Ажлын цаг: Даваа - Бямба, 08:00 - 20:00. Ням гарагт амарна.";
-            }
-            if (m.includes("баярлалаа") || m.includes("thank")) {
-                return "Баярлалаа! Танд амжилт хүсье. 😊";
-            }
-            return "Уучлаарай, би ойлгосонгүй. Та 'Обой наах үнэ', 'SPC шал үнэ', 'Захиалга өгөх', 'Холбоо барих' гэж асууж болно.";
+            if (m.includes("үнэ") || m.includes("хэд вэ") || m.includes("обой")) 
+                return "🤖 <strong>AI Agent:</strong> Обой наах үндсэн үйлчилгээ м² нь ~9,000₮ байна. Та хуудасны тооцоолуураар үнээ шууд тооцоолох боломжтой.";
+            if (m.includes("захиалга") || m.includes("захиалах")) 
+                return "🤖 <strong>AI Agent:</strong> Захиалга өгөхийн тулд тооцоолуурын доор байрлах маягтыг бөглөөд илгээнэ үү.";
+            if (m.includes("эскроу") || m.includes("баталгаа")) 
+                return "🤖 <strong>AI Agent:</strong> Эскроу систем нь таны мөнгийг ажил бүрэн дуусч хүлээлцтэл найдвартай хадгалж, баталгаажуулдаг систем юм. Дэлгэрэнгүйг дээрх цэнхэр баннер дээр дарж үзээрэй.";
+            return "🤖 <strong>AI Agent:</strong> Сайн байна уу? Би танд обой наалт болон засварын үнэ тооцоолоход туслахад бэлэн байна. 😊";
         }
     </script>
-
-    <!-- Facebook SDK -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"></script>
-
 </body>
 </html>
